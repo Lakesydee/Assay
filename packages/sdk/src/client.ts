@@ -1,9 +1,9 @@
 /*
- * Minimal KovaraClient used by the mobile app to build transaction XDR.
+ * Minimal AssayClient used by the mobile app to build transaction XDR.
  * Real implementations live in the published SDK; this stub matches the
  * surface area consumed by mobile hooks (createPost, tip, poolDeposit).
  */
-export interface KovaraClientOptions {
+export interface AssayClientOptions {
   contractId: string;
   rpcUrl: string;
   treasuryBalance?: bigint;
@@ -11,12 +11,12 @@ export interface KovaraClientOptions {
 
 const MAX_REWARD_AMOUNT = 1_000_000n;
 
-export class KovaraClient {
+export class AssayClient {
   readonly contractId: string;
   readonly rpcUrl: string;
   readonly treasuryBalance: bigint | undefined;
 
-  constructor(opts: KovaraClientOptions) {
+  constructor(opts: AssayClientOptions) {
     this.contractId = opts.contractId;
     this.rpcUrl = opts.rpcUrl;
     this.treasuryBalance = opts.treasuryBalance;

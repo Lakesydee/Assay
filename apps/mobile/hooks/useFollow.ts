@@ -1,12 +1,12 @@
 import { useCallback } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-// Assuming a provider or hook exists to access the KovaraClient and current user
+// Assuming a provider or hook exists to access the AssayClient and current user
 // If not, this would be replaced with the appropriate state management for the user session
-import { useKovara } from "./useKovara";
+import { useAssay } from "./useAssay";
 
 export const useFollow = (targetAddress: string) => {
-  const { client, address: me } = useKovara();
+  const { client, address: me } = useAssay();
   const queryClient = useQueryClient();
 
   // Fetch initial follow status

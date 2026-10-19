@@ -7,7 +7,7 @@ interface FollowButtonProps {
 }
 
 /**
- * FollowButton component for the Kovara mobile app.
+ * FollowButton component for the Assay mobile app.
  * Implements optimistic UI updates and handles contract-level blocking.
  */
 export const FollowButton: React.FC<FollowButtonProps> = ({ targetAddress }) => {

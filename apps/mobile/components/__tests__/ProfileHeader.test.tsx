@@ -15,7 +15,7 @@ import { submitProfileTransaction } from "../../hooks/profileContract";
 const mockGetProfile = jest.fn();
 
 jest.mock("../../../../packages/sdk/src/client", () => ({
-  KovaraClient: jest.fn().mockImplementation(() => ({
+  AssayClient: jest.fn().mockImplementation(() => ({
     getProfile: (...args: unknown[]) => mockGetProfile(...args),
   })),
 }));

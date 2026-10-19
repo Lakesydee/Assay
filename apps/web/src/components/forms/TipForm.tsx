@@ -163,7 +163,7 @@ function humaniseContractError(err: unknown): string {
       CONTRACT_AMOUNT_TOO_LOW:
         "The tip amount is below the contract minimum. Please increase it.",
       CONTRACT_PAUSED:
-        "The Kovara tip contract is temporarily paused. Check discord for updates.",
+        "The Assay tip contract is temporarily paused. Check discord for updates.",
     };
     return (
       friendlyMessages[err.code] ??

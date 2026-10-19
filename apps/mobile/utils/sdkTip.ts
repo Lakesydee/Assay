@@ -1,4 +1,4 @@
-import { KovaraClient } from "../../../packages/sdk/src/client";
+import { AssayClient } from "../../../packages/sdk/src/client";
 import type { WalletKitAdapter } from "../types/walletContext.types";
 
 export interface TipResult {
@@ -25,7 +25,7 @@ export async function sdkTip(
   amount: bigint,
   walletKit: WalletKitAdapter
 ): Promise<TipResult> {
-  const client = new KovaraClient({ contractId, rpcUrl });
+  const client = new AssayClient({ contractId, rpcUrl });
   const txXdr = client.tip(sender, postId, amount);
 
   let txHash: string;

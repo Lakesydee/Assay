@@ -188,7 +188,7 @@ export default function ExploreScreen() {
         ) : !hasQuery ? (
           <EmptyState
             icon="🔎"
-            title="Search Kovara"
+            title="Search Assay"
             subtitle="Find creators and community pools."
           />
         ) : !hasResults ? (

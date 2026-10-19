@@ -1,5 +1,5 @@
 /**
- * Thin client around the Kovara indexer REST API.
+ * Thin client around the Assay indexer REST API.
  *
  * Centralises fetch calls so the rest of the mobile app does not have to
  * duplicate URL construction, error mapping, or response parsing. The indexer
@@ -7,7 +7,7 @@
  * one post at a time from the Soroban RPC).
  *
  * Environment variable:
- *   EXPO_PUBLIC_INDEXER_URL  - Base URL of the indexer (e.g. https://indexer.kovara.io).
+ *   EXPO_PUBLIC_INDEXER_URL  - Base URL of the indexer (e.g. https://indexer.Assay.io).
  *                              The trailing slash is stripped automatically.
  *                              When unset, fetches will fail with `IndexerError`
  *                              so the UI can show a clear configuration error to

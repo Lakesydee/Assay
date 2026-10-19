@@ -44,9 +44,9 @@ describe("isValidIdempotencyKey", () => {
     expect(isValidIdempotencyKey({})).toBe(false);
     // A control character is invisible in a log line and in psql output, which
     // makes a poisoned key very hard to spot after the fact.
-    expect(isValidIdempotencyKey("kovara:event:v1:\u0000abc")).toBe(false);
-    expect(isValidIdempotencyKey("kovara:event:v1\nabc")).toBe(false);
-    expect(isValidIdempotencyKey("kovara:event:v1\u0007abc")).toBe(false);
+    expect(isValidIdempotencyKey("Assay:event:v1:\u0000abc")).toBe(false);
+    expect(isValidIdempotencyKey("Assay:event:v1\nabc")).toBe(false);
+    expect(isValidIdempotencyKey("Assay:event:v1\u0007abc")).toBe(false);
   });
 
   it("rejects an unbounded key so the unique index cannot be abused", () => {

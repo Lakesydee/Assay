@@ -2,7 +2,7 @@
  * Soroban event streaming via Horizon/Soroban RPC.
  *
  * Polls getEvents on the configured RPC endpoint and yields raw contract
- * events for the Kovara contract. Callers provide a cursor (latest processed
+ * events for the Assay contract. Callers provide a cursor (latest processed
  * ledger) so the stream can resume after a restart.
  *
  * BE-42: Also provides replay recovery utilities so operators can re-process

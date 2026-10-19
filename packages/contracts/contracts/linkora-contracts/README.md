@@ -1,6 +1,6 @@
-# Kovara Linkora Contract
+# Assay Linkora Contract
 
-A Soroban smart contract powering the Kovara social media protocol on Stellar. It provides:
+A Soroban smart contract powering the Assay social media protocol on Stellar. It provides:
 
 - **Profiles** — username registration with a reverse-index for uniqueness and a designated SEP-41 creator token for tips.
 - **Social graph** — follow / unfollow with bidirectional list maintenance; block / unblock.

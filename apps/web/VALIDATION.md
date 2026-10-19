@@ -1,7 +1,7 @@
 # Web Form Validation
 
 This document describes the input validation and sanitisation strategy for all
-Kovara web forms.
+Assay web forms.
 
 ---
 
@@ -57,7 +57,7 @@ receives only clean, validated data.
 # Web Form Validation
 
 This document describes the input validation and sanitisation strategy for all
-Kovara web forms.
+Assay web forms.
 
 ---
 
@@ -113,7 +113,7 @@ receives only clean, validated data.
 # Web Form Validation
 
 This document describes the input validation and sanitisation strategy for all
-Kovara web forms.
+Assay web forms.
 
 ---
 

@@ -1,6 +1,6 @@
 <!-- ---
 name: Bug report
-about: Report a reproducible problem in Kovara Social
+about: Report a reproducible problem in Assay Social
 title: "[Bug]: "
 labels: bug
 ---

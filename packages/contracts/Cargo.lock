@@ -3,7 +3,7 @@
 version = 4
 
 [[package]]
-name = "Kovara-contracts"
+name = "Assay-contracts"
 version = "0.2.0"
 dependencies = [
  "soroban-sdk",
@@ -1026,7 +1026,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "kovara-index"
+name = "Assay-index"
 version = "0.1.0"
 dependencies = [
  "soroban-sdk",

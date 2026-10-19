@@ -1,5 +1,5 @@
 /**
- * Stub HTTP server for Kovara indexer
+ * Stub HTTP server for Assay indexer
  * Minimal implementation without external dependencies
  */
 /**

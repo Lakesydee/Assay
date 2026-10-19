@@ -4,7 +4,7 @@ import { WalletProvider } from "@/components/WalletProvider";
 import { NavBar } from "@/components/NavBar";
 
 export const metadata: Metadata = {
-  title: "Kovara",
+  title: "Assay",
   description: "Decentralised social on Stellar",
 };
       // onPress={() => router.push("/connect" as Parameters<typeof router.push>[0])}

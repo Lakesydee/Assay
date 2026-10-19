@@ -63,7 +63,7 @@ describePg("PostgreSQL integration", () => {
       event_id: "evt-integration-0001",
       ledger: 100,
       contract_id: "CBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4T2",
-      topic: ["Kovara::Post::Created"],
+      topic: ["Assay::Post::Created"],
       value: "0x74657374",
       tx_hash: "txh-integration-0001",
       closed_at: new Date(),

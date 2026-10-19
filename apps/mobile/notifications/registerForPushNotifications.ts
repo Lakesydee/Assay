@@ -2,7 +2,7 @@ import * as Notifications from "expo-notifications";
 import * as SecureStore from "expo-secure-store";
 import { Platform } from "react-native";
 
-const SECURE_STORE_PUSH_TOKEN_KEY = "Kovara_push_token";
+const SECURE_STORE_PUSH_TOKEN_KEY = "Assay_push_token";
 
 export async function registerForPushNotificationsAsync(): Promise<string | null> {
   let token: string | null = null;

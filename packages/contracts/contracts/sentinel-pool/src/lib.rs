@@ -54,7 +54,7 @@
 //! [`Resolution::Rejected`].
 //!
 //! The rule is fail-closed on purpose: `SentinelPool` verifies data that
-//! feeds a financial index (`KovaraIndex`). A submission should need an
+//! feeds a financial index (`AssayIndex`). A submission should need an
 //! actual, positive majority in its favor to be treated as verified;
 //! anything that isn't a clear majority — a tie, or a quorum made up
 //! entirely of abstentions — defaults to `Rejected` rather than `Approved`.

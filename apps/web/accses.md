@@ -1,7 +1,7 @@
 # Web Form Validation
 
 This document describes the input validation and sanitisation strategy for all
-Kovara web forms.
+Assay web forms.
 
 ---
 

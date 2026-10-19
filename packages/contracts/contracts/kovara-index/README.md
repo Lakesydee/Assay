@@ -1,4 +1,4 @@
-# `kovara-index`
+# `Assay-index`
 
 Daily Kōvara Value Index (KVI) records — one per country, per day.
 
@@ -223,8 +223,8 @@ schemas are briefly live.
 ```bash
 cd packages/contracts
 
-cargo test -p kovara-index                       # 97 tests
-cargo build --target wasm32v1-none --release     # -> target/wasm32v1-none/release/kovara_index.wasm
+cargo test -p Assay-index                       # 97 tests
+cargo build --target wasm32v1-none --release     # -> target/wasm32v1-none/release/Assay_index.wasm
 ```
 
 Use **`wasm32v1-none`**, not `wasm32-unknown-unknown`. Rust 1.82+ enables

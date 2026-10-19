@@ -13,7 +13,7 @@ rather than a guess.
 Verified at `main` = `20d7bb5` with `cargo 1.98.1`:
 
 ```
-$ cd Contract && cargo check -p kovara-price-vault
+$ cd Contract && cargo check -p Assay-price-vault
 error: unexpected closing delimiter: `}`
    --> contracts/price-vault/src/lib.rs:641:1
     |
@@ -26,7 +26,7 @@ error: unexpected closing delimiter: `}`
 ```
 
 The same file content was fetched directly from the GitHub API for
-`mohraj123/Kovara` and is byte-identical to a fresh clone, so this is the state of
+`mohraj123/Assay` and is byte-identical to a fresh clone, so this is the state of
 `main` and not a local artifact.
 
 ## Root cause: CI never compiles the contracts

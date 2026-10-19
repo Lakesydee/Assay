@@ -6,7 +6,7 @@ export function NotConnectedState({ onConnect }: { onConnect: () => void }) {
       <div>
         <h2 className="text-2xl font-bold mb-2">Connect Your Wallet</h2>
         <p className="text-[var(--text-muted)] max-w-xs">
-          Choose Freighter or WalletConnect and approve the connection to access Kovara.
+          Choose Freighter or WalletConnect and approve the connection to access Assay.
         </p>
       </div>
       <button onClick={onConnect} className="btn-primary">

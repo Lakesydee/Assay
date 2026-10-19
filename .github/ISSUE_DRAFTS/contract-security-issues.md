@@ -1,6 +1,6 @@
 # Contract Security Issue — Sample Reports
 
-These drafts show what a well-formed security issue looks like for Kovara's Soroban contracts.
+These drafts show what a well-formed security issue looks like for Assay's Soroban contracts.
 Use labels: `contracts`, `security`, plus the applicable severity label.
 
 > ⚠️ These are **Medium / Low** severity examples only.
@@ -37,8 +37,8 @@ contract; on some implementations this could reduce the recipient's balance.
 fn test_tip_zero_amount_should_fail() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register_contract(None, KovaraContract);
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register_contract(None, AssayContract);
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let author = Address::generate(&env);
     let tipper = Address::generate(&env);

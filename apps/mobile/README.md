@@ -1,135 +1,37 @@
-# Kovara Mobile
+# Assay Mobile
 
-React Native / Expo mobile app for the Kovara SocialFi platform on Stellar.
+Assay Mobile is the mobile companion for repository safety checks and wallet-security awareness. It gives users a lightweight way to monitor scan status, review repo health, and stay informed when a project is clean, stale, or requires attention.
 
-> **Status:** This package is planned and not yet scaffolded. This README and the accompanying developer guide exist to document the intended structure ahead of implementation.
+## What this app is for
 
-## Quick Start
+- viewing the latest repository status and scanning badge
+- checking whether a repo is clean, stale, or has findings
+- surfacing wallet-related and security-sensitive alerts
+- supporting a secure, developer-friendly workflow alongside the web dashboard
 
-See [docs/mobile/DEVELOPER_GUIDE.md](../../docs/mobile/DEVELOPER_GUIDE.md) for full setup instructions covering prerequisites, simulator setup, project structure, and EAS builds.
+## Stack
 
-## Tech Stack
+- Expo
+- React Native
+- Expo Router
+- Secure storage for local session and preference handling
 
-- [Expo](https://expo.dev) (React Native)
-- [Expo Router](https://docs.expo.dev/router/introduction/) — file-based navigation
-- [EAS Build](https://docs.expo.dev/build/introduction/) — cloud native builds
-- [Stellar Wallet Kit](https://stellarwalletkit.dev) — wallet integration
-- [`packages/sdk`](../../packages/sdk) — typed Kovara contract client
-
-## Testing
-
-### Running Tests
+## Local development
 
 ```bash
-npm test
+cd apps/mobile
+pnpm install
+pnpm dev
 ```
 
-### Snapshot Testing
+This app is designed to work as a companion to the Assay web and backend services, not as a standalone scanner. The mobile experience is focused on status visibility, alerts, and secure onboarding flows.
 
-This project uses Jest snapshot testing to catch unintended visual regressions in UI components. Snapshots are automatically generated for core components like PostCard, PoolCard, and EmptyState.
+## Security notes
 
-#### Updating Snapshots
+- never store secrets in app configuration or source code
+- use secure storage for any local, user-scoped data
+- always treat network and wallet details as security-sensitive material
 
-When you intentionally change a component's visual output, you'll need to update the snapshots:
+## Build notes
 
-```bash
-# Update all snapshots
-npm test -- --updateSnapshot
-
-# Update snapshots for a specific test file
-npm test PostCard.snap.test.tsx -- --updateSnapshot
-```
-
-#### Snapshot Test Guidelines
-
-- Snapshots should be committed to the repository
-- CI will fail if snapshots change without an explicit update
-- Review snapshot changes carefully during code review
-- Each component should have snapshots for both default and loading states
-
-## EAS Build Configuration
-
-EAS (Expo Application Services) Build is configured in `eas.json`. It defines three profiles:
-
-- **development**: For local development using a simulator or development client device.
-- **preview**: For testing ad-hoc IPA builds on iOS and APK builds on Android.
-- **production**: For building production app store binaries.
-
-### Commands
-
-To trigger a build:
-
-```bash
-# Android preview build (generates APK)
-eas build --platform android --profile preview
-
-# iOS preview build (generates IPA)
-eas build --platform ios --profile preview
-
-# Submit a production build to App Store/Google Play
-eas submit --profile production
-```
-
-## Push Notifications
-
-Push notification scaffolding is located in `notifications/`.
-
-### Setup
-
-Call `registerForPushNotificationsAsync()` on first launch to request user permissions and secure the push token in Expo Secure Store. Set up listeners in the app's root lifecycle:
-
-```typescript
-import { useEffect } from "react";
-import { registerForPushNotificationsAsync } from "./notifications/registerForPushNotifications";
-import { setupNotificationListeners } from "./notifications/notificationHandler";
-
-useEffect(() => {
-  registerForPushNotificationsAsync();
-  const cleanup = setupNotificationListeners();
-  return cleanup;
-}, []);
-```
-
-### Notification Types & Payloads
-
-#### 1. New Follower (`NEW_FOLLOWER`)
-
-Triggered when a user follows another user.
-
-- **Payload Shape:**
-  ```json
-  {
-    "type": "NEW_FOLLOWER",
-    "followerAddress": "G..."
-  }
-  ```
-- **Routing:** Navigates directly to the follower's profile screen (`/profile/${followerAddress}`).
-
-#### 2. Tip Received (`TIP_RECEIVED`)
-
-Triggered when a tip is received.
-
-- **Payload Shape:**
-  ```json
-  {
-    "type": "TIP_RECEIVED",
-    "senderAddress": "G...",
-    "amount": "10",
-    "asset": "XLM"
-  }
-  ```
-- **Routing:** Navigates to the wallet details or history screen (`/wallet`).
-
-#### 3. Pool Activity (`POOL_ACTIVITY`)
-
-Triggered on a deposit or withdrawal from a pool.
-
-- **Payload Shape:**
-  ```json
-  {
-    "type": "POOL_ACTIVITY",
-    "poolId": "123",
-    "activityType": "deposit"
-  }
-  ```
-- **Routing:** Navigates to the pool details page (`/pool/${poolId}`).
+The project uses Expo configuration and EAS profiles for app builds. Use standard Expo commands for local development, preview builds, and production packaging when deployment is required.

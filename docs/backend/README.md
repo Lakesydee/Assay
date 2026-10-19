@@ -1,7 +1,7 @@
 # Backend documentation
 
-Reference documentation for the Kovara backend (`Backend/`): the indexer that
-streams Kovara Social contract events into PostgreSQL and the REST API that serves
+Reference documentation for the Assay backend (`Backend/`): the indexer that
+streams Assay Social contract events into PostgreSQL and the REST API that serves
 them.
 
 | Document | Covers |

@@ -131,7 +131,7 @@ describe("Wallet Connect Integration Tests", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockSecureStore.__resetStore();
-    globalThis.__Kovara_WALLET_KIT__ = mockWalletKit;
+    globalThis.__Assay_WALLET_KIT__ = mockWalletKit;
 
     // Reset wallet kit mocks
     mockWalletKit.connect.mockReset();
@@ -141,7 +141,7 @@ describe("Wallet Connect Integration Tests", () => {
   });
 
   afterEach(() => {
-    delete globalThis.__Kovara_WALLET_KIT__;
+    delete globalThis.__Assay_WALLET_KIT__;
   });
 
   describe("Connect Flow", () => {
@@ -485,11 +485,11 @@ describe("Freighter Connection Tests", () => {
     mockFreighterApi.getAddress.mockReset();
 
     // Ensure Wallet Kit mock is present so WalletProvider initializes properly
-    globalThis.__Kovara_WALLET_KIT__ = mockWalletKit;
+    globalThis.__Assay_WALLET_KIT__ = mockWalletKit;
   });
 
   afterEach(() => {
-    delete globalThis.__Kovara_WALLET_KIT__;
+    delete globalThis.__Assay_WALLET_KIT__;
   });
 
   describe("Successful Connection", () => {
@@ -727,7 +727,7 @@ describe("Freighter Connection Tests", () => {
  * A rejected connection must leave the app in a state the user can get out of:
  * no stale account on screen, no stuck spinner, and a retry that works.
  */
-describe("Wallet Connect — failure recovery (FE-29)", () => {
+describe("Wallet Connect ï¿½ failure recovery (FE-29)", () => {
   const mockAddress = "GCKFBEIYTKP6RCZNVPH73XL7XFWTEOAO4MKONX7HOILHDVBMW5EVPOPZ";
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const mockSecureStore = require("expo-secure-store");
@@ -735,7 +735,7 @@ describe("Wallet Connect — failure recovery (FE-29)", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockSecureStore.__resetStore();
-    globalThis.__Kovara_WALLET_KIT__ = mockWalletKit;
+    globalThis.__Assay_WALLET_KIT__ = mockWalletKit;
     mockWalletKit.getPublicKey.mockResolvedValue(mockAddress);
     mockWalletKit.isConnected.mockResolvedValue(true);
     mockWalletKit.disconnect.mockResolvedValue(undefined);

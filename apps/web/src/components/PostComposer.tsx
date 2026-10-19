@@ -136,7 +136,7 @@ export function PostComposer() {
         disabled={submitting}
         aria-describedby={error ? "post-content-error" : undefined}
         aria-invalid={Boolean(error)}
-        placeholder="Share something with the Kovara community…"
+        placeholder="Share something with the Assay community…"
         className="w-full resize-none rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-sm focus:border-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-500 disabled:opacity-50"
       />
 

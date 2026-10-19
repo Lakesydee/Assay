@@ -8,8 +8,8 @@ import { useInstalledApps } from "../../mini-apps/store";
 
 const BRIDGE_INJECTION = `
 (function() {
-  if (window.KovaraBridge) return;
-  window.KovaraBridge = {
+  if (window.AssayBridge) return;
+  window.AssayBridge = {
     _callbacks: {},
     _nextId: 1,
     call: function(method, payload) {
@@ -66,13 +66,13 @@ export default function MiniAppHostScreen() {
         parsed = JSON.parse(event.nativeEvent.data);
         const result = await bridge.call(parsed.method, parsed.payload);
         webviewRef.current?.injectJavaScript(
-          `window.KovaraBridge._handleResponse(${parsed.id}, null, ${JSON.stringify(result)});true;`
+          `window.AssayBridge._handleResponse(${parsed.id}, null, ${JSON.stringify(result)});true;`
         );
       } catch (err) {
         const msgId = parsed?.id ?? 0;
         const message = err instanceof Error ? err.message : "Bridge call failed";
         webviewRef.current?.injectJavaScript(
-          `window.KovaraBridge._handleResponse(${msgId}, ${JSON.stringify(message)}, null);true;`
+          `window.AssayBridge._handleResponse(${msgId}, ${JSON.stringify(message)}, null);true;`
         );
       }
     },

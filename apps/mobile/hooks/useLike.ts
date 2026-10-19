@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { KovaraClient } from "../../../packages/sdk/src/client";
+import { AssayClient } from "../../../packages/sdk/src/client";
 import { useNetwork } from "./useNetwork";
 import { useWallet } from "./useWallet";
 import { useToast } from "../context/ToastContext";
@@ -8,16 +8,16 @@ import { useToast } from "../context/ToastContext";
 // ── SDK-backed like/unlike transactions ─────────────────────────────────────
  // const signed = await kit.signTransaction({ txXdr: xdrEnv });
 async function contractLikePost(liker: string, postId: number, rpcUrl: string, contractId: string): Promise<void> {
-  const client = new KovaraClient({ contractId, rpcUrl });
+  const client = new AssayClient({ contractId, rpcUrl });
   const xdrEnv = client.like(liker, postId);
 
   const kit = (
     globalThis as unknown as {
-      __Kovara_WALLET_KIT__?: {
+      __Assay_WALLET_KIT__?: {
         signAndSubmitTransaction: (opts: { txXdr: string }) => Promise<{ hash?: string; txHash?: string }>;
       };
     }
-  ).__Kovara_WALLET_KIT__;
+  ).__Assay_WALLET_KIT__;
 
   if (kit && typeof kit.signAndSubmitTransaction === "function") {
     const res = await kit.signAndSubmitTransaction({ txXdr: xdrEnv });
@@ -29,16 +29,16 @@ async function contractLikePost(liker: string, postId: number, rpcUrl: string, c
 }
 
 async function contractUnlikePost(liker: string, postId: number, rpcUrl: string, contractId: string): Promise<void> {
-  const client = new KovaraClient({ contractId, rpcUrl });
+  const client = new AssayClient({ contractId, rpcUrl });
   const xdrEnv = client.unlike(liker, postId);
 
   const kit = (
     globalThis as unknown as {
-      __Kovara_WALLET_KIT__?: {
+      __Assay_WALLET_KIT__?: {
         signAndSubmitTransaction: (opts: { txXdr: string }) => Promise<{ hash?: string; txHash?: string }>;
       };
     }
-  ).__Kovara_WALLET_KIT__;
+  ).__Assay_WALLET_KIT__;
 
   if (kit && typeof kit.signAndSubmitTransaction === "function") {
     const res = await kit.signAndSubmitTransaction({ txXdr: xdrEnv });

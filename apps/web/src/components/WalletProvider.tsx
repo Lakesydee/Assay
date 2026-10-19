@@ -14,9 +14,9 @@ import {
   type WalletProviderKind,
 } from "@/lib/walletProviders";
 
-const LS_KEY = "Kovara_wallet_address";
-const LS_NETWORK_KEY = "Kovara_wallet_network";
-const LS_PROVIDER_KEY = "Kovara_wallet_provider";
+const LS_KEY = "Assay_wallet_address";
+const LS_NETWORK_KEY = "Assay_wallet_network";
+const LS_PROVIDER_KEY = "Assay_wallet_provider";
 
 export interface WalletContextValue {
   address: string | null;
@@ -161,9 +161,9 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         const client = await SignClient.init({
           projectId: "demo-project-id",
           metadata: {
-            name: "Kovara",
-            description: "Kovara SocialFi wallet connection",
-            url: "https://kovara.app",
+            name: "Assay",
+            description: "Assay SocialFi wallet connection",
+            url: "https://Assay.app",
             icons: [],
           },
         });

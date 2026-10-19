@@ -1,8 +1,8 @@
 {
-  "name": "@Kovara/indexer",
+  "name": "@assay/api",
   "version": "0.1.0",
   "private": true,
-  "description": "Off-chain indexer service for Kovara social contract events",
+  "description": "Assay backend API and scan orchestration service",
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx",

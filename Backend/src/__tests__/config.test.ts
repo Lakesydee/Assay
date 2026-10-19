@@ -23,7 +23,7 @@ import {
 const VALID_CONTRACT_ID = "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75";
 const OTHER_VALID_CONTRACT_ID = "CAS3J7GYLGXMF6TDJBBYYSE3HQ6BBSMLNUQ34T6TZMYMW2EVH34XOWMA";
 
-const VALID_DATABASE_URL = "postgresql://kovara:kovara@localhost:5432/kovara";
+const VALID_DATABASE_URL = "postgresql://Assay:Assay@localhost:5432/Assay";
 
 /** A fully valid environment, used as the baseline for negative cases. */
 function validEnv(overrides: Record<string, string | undefined> = {}) {
@@ -42,7 +42,7 @@ describe("parseDatabaseUrl", () => {
   });
 
   it("accepts the postgres:// scheme alias and the docker-compose host form", () => {
-    const compose = "postgres://Kovara:Kovara@postgres:5432/Kovara";
+    const compose = "postgres://Assay:Assay@postgres:5432/Assay";
     expect(parseDatabaseUrl(compose)).toBe(compose);
   });
 
@@ -58,7 +58,7 @@ describe("parseDatabaseUrl", () => {
   });
 
   it("rejects a non-PostgreSQL database URL", () => {
-    expect(() => parseDatabaseUrl("mysql://user:pw@localhost:3306/kovara")).toThrow(
+    expect(() => parseDatabaseUrl("mysql://user:pw@localhost:3306/Assay")).toThrow(
       /must be a PostgreSQL connection string/
     );
   });
@@ -69,7 +69,7 @@ describe("parseDatabaseUrl", () => {
 
   it("does not leak credentials when reporting a malformed URL", () => {
     // A bare "//" is a URL parse failure but still carries userinfo.
-    const err = captureConfigError(() => parseDatabaseUrl("//kovara:hunter2@localhost/db"));
+    const err = captureConfigError(() => parseDatabaseUrl("//Assay:hunter2@localhost/db"));
     expect(err.message).not.toContain("hunter2");
   });
 

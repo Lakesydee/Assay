@@ -2171,7 +2171,7 @@ mod tests {
     fn evidence(env: &Env, proof_ref: &str) -> SlashEvidence {
         SlashEvidence {
             proof_ref: String::from_str(env, proof_ref),
-            uri: String::from_str(env, "ipfs://kovara/cases"),
+            uri: String::from_str(env, "ipfs://Assay/cases"),
             content_hash: Bytes::from_slice(env, &[0xab; 32]),
         }
     }
@@ -2569,7 +2569,7 @@ mod tests {
 
         let no_ref = SlashEvidence {
             proof_ref: String::from_str(&env, ""),
-            uri: String::from_str(&env, "ipfs://kovara/cases"),
+            uri: String::from_str(&env, "ipfs://Assay/cases"),
             content_hash: Bytes::from_slice(&env, &[0xab; 32]),
         };
         let no_uri = SlashEvidence {

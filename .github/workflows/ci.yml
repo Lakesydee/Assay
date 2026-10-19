@@ -41,7 +41,7 @@ jobs:
           - package: mobile
             os: ubuntu-latest
             working_directory: apps/mobile
-            test_command: pnpm test --filter=@Kovara/mobile -- --ci --coverage
+            test_command: pnpm test --filter=@Assay/mobile -- --ci --coverage
 
     steps:
       - name: Checkout

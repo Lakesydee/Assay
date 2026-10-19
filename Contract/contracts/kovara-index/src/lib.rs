@@ -1,5 +1,5 @@
 #![no_std]
-//! `KovaraIndex` — aggregates verified prices into the daily `KVI`
+//! `AssayIndex` — aggregates verified prices into the daily `KVI`
 //! (Kōvara Value Index) per country.
 //!
 //! CT-001 scaffolding: wires the contract to the Soroban SDK and stores one
@@ -15,7 +15,7 @@
 //! from a correct one — there is no error anywhere, only a silently wrong
 //! number that downstream consumers read.
 //!
-//! [`KovaraIndex::set_daily_index_windowed`] closes that. The caller supplies
+//! [`AssayIndex::set_daily_index_windowed`] closes that. The caller supplies
 //! the window the observation came from, and the contract applies the same
 //! predicate `PriceVault` uses:
 //!
@@ -28,7 +28,7 @@
 //! and before any write, so a stale write costs the caller one failed
 //! transaction and leaves the previous index value intact.
 //!
-//! The predicate itself is [`KovaraIndex::is_fresh`], a pure view, so a caller
+//! The predicate itself is [`AssayIndex::is_fresh`], a pure view, so a caller
 //! can ask the question without submitting a transaction.
 
 use soroban_sdk::{contract, contracterror, contractimpl, contracttype, Address, Env, Symbol};
@@ -59,10 +59,10 @@ pub enum DataKey {
 }
 
 #[contract]
-pub struct KovaraIndex;
+pub struct AssayIndex;
 
 #[contractimpl]
-impl KovaraIndex {
+impl AssayIndex {
     /// Write one daily index value for a country/date.
     pub fn set_daily_index(
         env: Env,
@@ -197,10 +197,10 @@ mod tests {
         Env,
     };
 
-    fn deploy(env: &Env) -> (KovaraIndexClient, Address) {
-        let contract_id = env.register(KovaraIndex, ());
+    fn deploy(env: &Env) -> (AssayIndexClient, Address) {
+        let contract_id = env.register(AssayIndex, ());
         (
-            KovaraIndexClient::new(env, &contract_id),
+            AssayIndexClient::new(env, &contract_id),
             Address::generate(env),
         )
     }

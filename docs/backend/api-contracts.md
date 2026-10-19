@@ -1,4 +1,4 @@
-# Kovara backend — REST API contracts
+# Assay backend — REST API contracts
 
 The read-only HTTP surface served by `createApp()` in `Backend/src/api/index.ts`.
 Request and response shapes below were read from the route modules on `main`

@@ -37,7 +37,7 @@
 #         working-directory: packages/sdk
 #         env:
 #           TESTNET_SECRET_KEY: ${{ secrets.TESTNET_SECRET_KEY }}
-#           Kovara_CONTRACT_ID: ${{ github.event.inputs.contract_id || 'CDLDVFKHEZ2RVB3NG4UQA4VPD3TSHV6XMHXMHP2BSGCJ2IIWVTOHGDSG' }}
+#           Assay_CONTRACT_ID: ${{ github.event.inputs.contract_id || 'CDLDVFKHEZ2RVB3NG4UQA4VPD3TSHV6XMHXMHP2BSGCJ2IIWVTOHGDSG' }}
 #         run: pnpm test:e2e
 
 #       - name: Upload test results

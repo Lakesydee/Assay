@@ -1,4 +1,4 @@
-# @kovara/contracts
+# @Assay/contracts
 
 > Soroban smart contracts powering the Kōvara protocol — price submission, peer verification, reward distribution, and daily index aggregation — all written in Rust and deployed on the Stellar Network.
 
@@ -11,14 +11,14 @@
 
 ## Overview
 
-`@kovara/contracts` contains all four Soroban smart contracts that form the on-chain backbone of the Kōvara protocol. Each contract has a single, clearly scoped responsibility and communicates with the others via cross-contract calls where necessary.
+`@Assay/contracts` contains all four Soroban smart contracts that form the on-chain backbone of the Kōvara protocol. Each contract has a single, clearly scoped responsibility and communicates with the others via cross-contract calls where necessary.
 
 | Contract       | Description                                                                    |
 | -------------- | ------------------------------------------------------------------------------ |
 | `PriceVault`   | Stores raw price submissions keyed by country, category, and timestamp         |
 | `SentinelPool` | Manages verifier staking, vote casting, quorum resolution, and slashing        |
 | `FlowRewards`  | Holds the reward treasury and releases XLM / Stellar USDC to contributors      |
-| `KovaraIndex`  | Aggregates verified prices into the daily KVI (Kōvara Value Index) per country |
+| `AssayIndex`  | Aggregates verified prices into the daily KVI (Kōvara Value Index) per country |
 
 ---
 
@@ -30,13 +30,13 @@ contracts/
 │   ├── price_vault.rs          # PriceVault contract
 │   ├── sentinel_pool.rs        # SentinelPool contract
 │   ├── flow_rewards.rs         # FlowRewards contract
-│   ├── kovara_index.rs         # KovaraIndex contract
+│   ├── Assay_index.rs         # AssayIndex contract
 │   └── types.rs                # Shared types, enums, error codes
 ├── tests/
 │   ├── price_vault_test.rs
 │   ├── sentinel_pool_test.rs
 │   ├── flow_rewards_test.rs
-│   └── kovara_index_test.rs
+│   └── Assay_index_test.rs
 ├── scripts/
 │   ├── deploy_testnet.sh       # Deploy all contracts to Testnet
 │   ├── deploy_mainnet.sh       # Deploy to Mainnet (requires multisig)
@@ -161,9 +161,9 @@ STELLAR_SOURCE_ACCOUNT=alice make deploy-verify
 
 The command builds the WASM, deploys it to `STELLAR_NETWORK` (defaulting to `testnet`), fetches the deployed artifact, compares SHA-256 hashes, and writes the verified `CONTRACT_ID` and `WASM_SHA256` to `deployment-testnet.env`. Set `DEPLOYMENT_OUTPUT` to choose another record file. The generated file contains deployment identifiers and must not be committed.
 
-## Kovara Social Contract API Reference
+## Assay Social Contract API Reference
 
-The current Soroban implementation lives in `contracts/linkora-contracts/src/lib.rs` as `KovaraContract`. The implicit Soroban `Env` parameter is omitted from the inputs below.
+The current Soroban implementation lives in `contracts/linkora-contracts/src/lib.rs` as `AssayContract`. The implicit Soroban `Env` parameter is omitted from the inputs below.
 
 | Method                    | Inputs                                                                                                  | Auth requirements                                                           | Return value                                                                                                                                                                                       |
 | ------------------------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -211,7 +211,7 @@ The current Soroban implementation lives in `contracts/linkora-contracts/src/lib
 
 ### `PriceVault`
 
-The entry point for all price submissions. Stores raw, unverified prices on-ledger and emits events consumed by the `@kovara/sentinel` oracle daemon.
+The entry point for all price submissions. Stores raw, unverified prices on-ledger and emits events consumed by the `@Assay/sentinel` oracle daemon.
 
 **Storage keys:**
 
@@ -283,7 +283,7 @@ fn unstake(env: Env, verifier: Address) -> Result<i128, Error>;
 
 ### `FlowRewards`
 
-Holds the protocol's reward treasury (XLM + Stellar USDC). Releases rewards after the `SentinelPool` resolves a submission. Only callable by `SentinelPool` and `KovaraIndex` via cross-contract calls.
+Holds the protocol's reward treasury (XLM + Stellar USDC). Releases rewards after the `SentinelPool` resolves a submission. Only callable by `SentinelPool` and `AssayIndex` via cross-contract calls.
 
 **Interface:**
 
@@ -319,9 +319,9 @@ fn balances(env: Env) -> TreasuryBalance;
 
 ---
 
-### `KovaraIndex`
+### `AssayIndex`
 
-Invoked once per day by the `@kovara/sentinel` oracle daemon. Reads all submissions verified within the past 24 hours, computes the trimmed median per category per country, and writes the resulting KVI snapshot on-chain.
+Invoked once per day by the `@Assay/sentinel` oracle daemon. Reads all submissions verified within the past 24 hours, computes the trimmed median per category per country, and writes the resulting KVI snapshot on-chain.
 
 **Interface:**
 
@@ -383,7 +383,7 @@ Or use the workspace-level build:
 
 ```bash
 # From repo root
-pnpm turbo build --filter=@kovara/contracts
+pnpm turbo build --filter=@Assay/contracts
 ```
 
 ### Test
@@ -398,7 +398,7 @@ Tests run against the Soroban sandbox (no live network required).
 
 ```bash
 # Set your Testnet keypair
-export KOVARA_DEPLOYER_SECRET=S...
+export Assay_DEPLOYER_SECRET=S...
 
 bash scripts/deploy_testnet.sh
 ```
@@ -418,7 +418,7 @@ Mainnet deployment requires a 2-of-3 multisig from the Kōvara core team. See [d
 | Testnet | PriceVault   | `GCPV...`               |
 | Testnet | SentinelPool | `GCSP...`               |
 | Testnet | FlowRewards  | `GCFR...`               |
-| Testnet | KovaraIndex  | `GCKI...`               |
+| Testnet | AssayIndex  | `GCKI...`               |
 | Mainnet | All          | TBD — launching Q3 2025 |
 
 ---

@@ -369,7 +369,7 @@ pub struct TreasuryUpdatedEvent {
 // ── Contract ──────────────────────────────────────────────────────────────────
 
 #[contract]
-pub struct KovaraContract;
+pub struct AssayContract;
 
 // ── Validation Helpers ────────────────────────────────────────────────────────
 
@@ -427,7 +427,7 @@ where
 }
 
 #[contractimpl]
-impl KovaraContract {
+impl AssayContract {
     // ── Initialization ────────────────────────────────────────────────────────
 
     pub fn initialize(env: Env, admin: Address, treasury: Address, fee_bps: u32) {

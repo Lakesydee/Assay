@@ -5,7 +5,7 @@
 //! (CT-037).
 
 use crate::{
-    round_half_away, DailyIndex, DailyIndexUpdated, DataKey, Error, KovaraIndex, KovaraIndexClient,
+    round_half_away, DailyIndex, DailyIndexUpdated, DataKey, Error, AssayIndex, AssayIndexClient,
     Observation, PendingRecovery, PendingTransfer, KVI_BASELINE, KVI_SCALE, KVI_VALUE_MAX,
     MAX_HISTORY_WINDOW, RECOVERY_DELAY_LEDGERS, SCHEMA_VERSION,
 };
@@ -15,7 +15,7 @@ use soroban_sdk::{symbol_short, vec, Address, Env, Event, IntoVal, Symbol, Vec};
 
 struct Fixture<'a> {
     env: Env,
-    client: KovaraIndexClient<'a>,
+    client: AssayIndexClient<'a>,
     contract_id: Address,
     admin: Address,
     updater: Address,
@@ -23,8 +23,8 @@ struct Fixture<'a> {
 
 fn deploy() -> Fixture<'static> {
     let env = Env::default();
-    let contract_id = env.register(KovaraIndex, ());
-    let client = KovaraIndexClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayIndex, ());
+    let client = AssayIndexClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let updater = Address::generate(&env);
@@ -1423,7 +1423,7 @@ fn a_rotated_out_sentinel_cannot_propose_a_recovery() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// CT-030 — daily KovaraIndex storage (#505)
+// CT-030 — daily AssayIndex storage (#505)
 // ═══════════════════════════════════════════════════════════════════════════
 
 /// Three consecutive days for the fixture country, written in order.

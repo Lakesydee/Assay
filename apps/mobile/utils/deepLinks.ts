@@ -12,8 +12,8 @@ export type DeepLinkRoute =
       path: `/pool/${string}`;
     };
 
-const Kovara_SCHEME = "Kovara:";
-const Kovara_PREFIX = "Kovara://";
+const Assay_SCHEME = "Assay:";
+const Assay_PREFIX = "Assay://";
 const ID_PATTERN = /^[A-Za-z0-9_-]{1,128}$/;
 const STELLAR_PUBLIC_KEY_PATTERN = /^G[A-Z2-7]{55}$/;
 
@@ -26,11 +26,11 @@ function safeDecode(value: string): string | null {
 }
 
 function getDeepLinkSegments(value: string): Array<string | null> | null {
-  if (!value.startsWith(Kovara_PREFIX)) {
+  if (!value.startsWith(Assay_PREFIX)) {
     return null;
   }
 
-  const withoutScheme = value.slice(Kovara_PREFIX.length);
+  const withoutScheme = value.slice(Assay_PREFIX.length);
   const pathEndIndex = withoutScheme.search(/[?#]/);
   const rawPath = pathEndIndex === -1 ? withoutScheme : withoutScheme.slice(0, pathEndIndex);
   const path = rawPath.startsWith("/") ? rawPath.slice(1) : rawPath;
@@ -52,7 +52,7 @@ function isValidProfileAddress(value: string): boolean {
 }
 
 export function parseDeepLink(value: string): DeepLinkRoute | null {
-  if (!value.startsWith(Kovara_SCHEME)) {
+  if (!value.startsWith(Assay_SCHEME)) {
     return null;
   }
 

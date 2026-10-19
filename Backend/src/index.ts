@@ -1,8 +1,8 @@
 /**
- * Kovara Indexer — entry point.
+ * Assay Indexer — entry point.
  *
  * Connects to a Soroban RPC endpoint, streams contract events from the
- * Kovara contract, writes raw events to PostgreSQL, and dispatches each
+ * Assay contract, writes raw events to PostgreSQL, and dispatches each
  * event to the appropriate typed handler. Also starts the REST API server
  * for querying indexed data.
  *

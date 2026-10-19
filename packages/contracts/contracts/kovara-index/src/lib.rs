@@ -1,11 +1,11 @@
 #![no_std]
-//! Kōvara smart contracts — PriceVault and KovaraIndex.
+//! Kōvara smart contracts — PriceVault and AssayIndex.
 //!
 //! # PriceVault (CT-002, CT-003, CT-004, CT-005)
 //!
 //! Stores raw price submissions on-ledger. The entry point for all price
 //! submissions. Stores unverified prices and emits events consumed by the
-//! `@kovara/sentinel` oracle daemon.
+//! `@Assay/sentinel` oracle daemon.
 //!
 //! | Issue | Description |
 //! |---|---|
@@ -14,7 +14,7 @@
 //! | CT-004 | Validate countries and categories |
 //! | CT-005 | Reject invalid price values |
 //!
-//! # KovaraIndex (CT-030 through CT-037)
+//! # AssayIndex (CT-030 through CT-037)
 //!
 //! Daily Kōvara Value Index (KVI) records, one per country per day.
 //! The full **CT-030..CT-037** series for the daily index lands in this
@@ -442,10 +442,10 @@ pub struct AdminRecoveryCancelled {
 }
 
 #[contract]
-pub struct KovaraIndex;
+pub struct AssayIndex;
 
 #[contractimpl]
-impl KovaraIndex {
+impl AssayIndex {
     /// Initialize the contract, recording the admin and the schema version.
     ///
     /// # Errors

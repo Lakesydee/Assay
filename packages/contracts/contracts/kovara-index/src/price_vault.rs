@@ -1,7 +1,7 @@
 //! `PriceVault` — stores raw price submissions on-ledger.
 //!
 //! This contract is the entry point for all price submissions. It stores
-//! unverified prices and emits events consumed by the `@kovara/sentinel`
+//! unverified prices and emits events consumed by the `@Assay/sentinel`
 //! oracle daemon.
 //!
 //! # Issues addressed
@@ -72,7 +72,7 @@
 //! * `set_verification_status(id, status)` — admin-only; called by the
 //!   `SentinelPool` contract (or its authorized proxy) once a quorum is
 //!   reached. Transitioning to `Verified` also appends the ID to
-//!   `VerifiedSubmissions` so `KovaraIndex` can query it directly.
+//!   `VerifiedSubmissions` so `AssayIndex` can query it directly.
 //!
 //! * `set_reward_status(id, status)` — admin-only; called by `FlowRewards`
 //!   after a reward is released or when a submission is found ineligible.
@@ -120,7 +120,7 @@ pub const TIMESTAMP_UNIT: &str = "unix_seconds_utc";
 /// when the quorum finds the price implausible.
 ///
 /// `Verified` is the only state that makes a submission eligible to be
-/// included in a daily `KovaraIndex` aggregation.
+/// included in a daily `AssayIndex` aggregation.
 #[contracttype]
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
 pub enum VerificationStatus {
@@ -226,7 +226,7 @@ pub enum DataKey {
     /// Persistent: verified submission IDs for a given country.
     ///
     /// Appended to when `set_verification_status` transitions a record to
-    /// `Verified`. Used by `KovaraIndex` to aggregate only confirmed data.
+    /// `Verified`. Used by `AssayIndex` to aggregate only confirmed data.
     VerifiedSubmissions(Symbol, u32),
 
     /// Instance: allowed country codes.
@@ -626,7 +626,7 @@ impl PriceVault {
     /// (or its authorized proxy) once a peer-verification quorum is reached.
     ///
     /// When transitioning to `Verified`, the submission ID is also appended to
-    /// `DataKey::VerifiedSubmissions` so that `KovaraIndex` can aggregate
+    /// `DataKey::VerifiedSubmissions` so that `AssayIndex` can aggregate
     /// confirmed data without scanning the full pending list.
     ///
     /// # Errors
@@ -796,7 +796,7 @@ impl PriceVault {
 
     /// Read all verified submission IDs for a country.
     ///
-    /// Used by `KovaraIndex` to aggregate confirmed data.
+    /// Used by `AssayIndex` to aggregate confirmed data.
     pub fn verified_ids(env: Env, country_iso: Symbol) -> Vec<u64> {
         let schema_version = match Self::require_compatible_schema(&env) {
             Ok(v) => v,

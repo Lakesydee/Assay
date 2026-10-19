@@ -79,9 +79,9 @@ async function createWalletConnectAdapter(): Promise<WalletConnectLike> {
         (await SignClient.init({
           projectId,
           metadata: {
-            name: "Kovara",
-            description: "Kovara SocialFi mobile app",
-            url: "https://github.com/Epta-Node/Kovara",
+            name: "Assay",
+            description: "Assay SocialFi mobile app",
+            url: "https://github.com/Epta-Node/Assay",
             icons: [],
           },
         }));
@@ -160,7 +160,7 @@ async function createWalletConnectAdapter(): Promise<WalletConnectLike> {
 
 declare global {
   // eslint-disable-next-line no-var, @typescript-eslint/no-explicit-any
-  var __Kovara_WALLET_KIT__: any | undefined;
+  var __Assay_WALLET_KIT__: any | undefined;
 }
 
 export interface WalletContextType {
@@ -195,7 +195,7 @@ export function WalletProvider({ children }: { children: ReactNode }): JSX.Eleme
   });
 
   const [walletKit, setWalletKit] = useState<WalletConnectLike | null>(
-    () => globalThis.__Kovara_WALLET_KIT__ ?? null
+    () => globalThis.__Assay_WALLET_KIT__ ?? null
   );
 
   useEffect(() => {
@@ -203,8 +203,8 @@ export function WalletProvider({ children }: { children: ReactNode }): JSX.Eleme
 
     const init = async () => {
       try {
-        if (globalThis.__Kovara_WALLET_KIT__) {
-          setWalletKit(globalThis.__Kovara_WALLET_KIT__);
+        if (globalThis.__Assay_WALLET_KIT__) {
+          setWalletKit(globalThis.__Assay_WALLET_KIT__);
           if (!cancelled) {
             setAvailability((prev) => ({ ...prev, walletconnect: true }));
           }
@@ -216,7 +216,7 @@ export function WalletProvider({ children }: { children: ReactNode }): JSX.Eleme
           // Expose globally for other modules that expect a wallet kit
           // (tests or mini-app bridges may rely on this global).
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (globalThis as any).__Kovara_WALLET_KIT__ = adapter;
+          (globalThis as any).__Assay_WALLET_KIT__ = adapter;
           setWalletKit(adapter);
           setAvailability((prev) => ({ ...prev, walletconnect: true }));
         }

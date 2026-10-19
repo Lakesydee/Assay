@@ -1,5 +1,5 @@
 /**
- * Structured logger for the Kovara indexer.
+ * Structured logger for the Assay indexer.
  *
  * BA-039: Centralizes logging so filtering is consistent and sensitive
  * data is never written raw:

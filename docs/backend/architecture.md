@@ -1,7 +1,7 @@
-# Kovara backend — architecture
+# Assay backend — architecture
 
-This page describes the **Kovara indexer** (`Backend/`), the Node/TypeScript service
-that indexes Kovara Social contract events into PostgreSQL and serves a read-only
+This page describes the **Assay indexer** (`Backend/`), the Node/TypeScript service
+that indexes Assay Social contract events into PostgreSQL and serves a read-only
 REST API over the result.
 
 > **Source of truth.** Everything here was read from the code on `main`
@@ -409,7 +409,7 @@ These are real, observable in the code, and worth knowing before operating the s
   (which is what `Backend/README.md` and `.env.example` document).
 - **Event topic convention.** `handleEvent` switches on `topic[0]`, while
   `EVENTS.md` defines topics as `(ContractName, EventName, Version)` with
-  `topic[0] == "Kovara"`. Confirm which contract/ABI is deployed before relying on
+  `topic[0] == "Assay"`. Confirm which contract/ABI is deployed before relying on
   the dispatch keys.
 - **Response envelope is inconsistent.** `api/response.ts` defines a
   `{ success, data, timestamp }` envelope, but most routes return bare resource

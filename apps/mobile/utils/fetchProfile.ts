@@ -1,4 +1,4 @@
-import { KovaraClient } from "../../../packages/sdk/src/client";
+import { AssayClient } from "../../../packages/sdk/src/client";
 
 export interface ProfileData {
   address: string;
@@ -14,7 +14,7 @@ export async function fetchProfile(
 ): Promise<ProfileData | null> {
   if (!address) return null;
 
-  const client = new KovaraClient({ contractId, rpcUrl });
+  const client = new AssayClient({ contractId, rpcUrl });
   const raw = await client.getProfile(address);
 
   if (!raw) return null;

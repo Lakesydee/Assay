@@ -5,7 +5,7 @@
 /// without conflating different assets.
 use soroban_sdk::{contractevent, contractimpl, contracttype, panic_with_error, Address, Env, Symbol};
 
-use crate::{ContractError, KovaraContract, StorageKey};
+use crate::{ContractError, AssayContract, StorageKey};
 
 #[contracttype]
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -15,7 +15,7 @@ pub enum Verdict {
 }
 use soroban_sdk::{contractevent, contractimpl, panic_with_error, Address, Env, Symbol};
 
-use crate::{ContractError, KovaraContract, StorageKey, ADMIN};
+use crate::{ContractError, AssayContract, StorageKey, ADMIN};
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -125,7 +125,7 @@ pub struct RoundFinalizedEvent {
 // ── Implementation ────────────────────────────────────────────────────────────
 
 #[contractimpl]
-impl KovaraContract {
+impl AssayContract {
     /// Register `verifier` as a participant in the verifier pool.
     pub fn register_verifier(env: Env, verifier: Address) {
         Self::require_initialized(&env);

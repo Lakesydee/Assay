@@ -1,5 +1,5 @@
 /**
- * Durable event store for the Kovara indexer.
+ * Durable event store for the Assay indexer.
  *
  * Provides PostgreSQL-backed reliability primitives used by the streaming
  * pipeline:

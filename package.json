@@ -1,5 +1,5 @@
 {
-  "name": "Kovaras",
+  "name": "Assay",
   "private": true,
   "scripts": {
     "dev": "turbo run dev",

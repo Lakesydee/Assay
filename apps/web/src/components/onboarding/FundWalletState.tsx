@@ -16,7 +16,7 @@ export function FundWalletState({ address, onFunded }: { address: string; onFund
         <h2 className="text-2xl font-bold mb-2">Fund Your Testnet Wallet</h2>
         <p className="text-[var(--text-muted)] max-w-xs">
           Your wallet has no XLM. Use the Friendbot faucet to get testnet funds so you can create a
-          profile and interact with Kovara.
+          profile and interact with Assay.
         </p>
         <p className="mt-3 font-mono text-xs text-[var(--text-muted)] break-all">{address}</p>
       </div>

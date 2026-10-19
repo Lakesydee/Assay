@@ -1,5 +1,5 @@
 /**
- * Kovara Indexer — startup configuration.
+ * Assay Indexer — startup configuration.
  *
  * Every value the indexer needs before it can do useful work is parsed and
  * validated here, in one place, with no side effects. The indexer previously
@@ -73,7 +73,7 @@ export function parseDatabaseUrl(raw: string | undefined): string {
   if (value === "") {
     throw new ConfigError([
       "DATABASE_URL is required — the indexer stores events in PostgreSQL and has no " +
-        "usable default (example: postgresql://user:password@localhost:5432/kovara)",
+        "usable default (example: postgresql://user:password@localhost:5432/Assay)",
     ]);
   }
 
@@ -184,7 +184,7 @@ export function parseContractId(raw: string | undefined): string {
   const value = raw?.trim() ?? "";
   if (value === "") {
     throw new ConfigError([
-      "CONTRACT_ID is required — set it to the deployed Kovara contract address " +
+      "CONTRACT_ID is required — set it to the deployed Assay contract address " +
         "(a 56-character Stellar address beginning with C)",
     ]);
   }

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { KovaraClient } from "../../../packages/sdk/src/client";
+import { AssayClient } from "../../../packages/sdk/src/client";
 import { IndexerError } from "../../../packages/sdk/src/errors";
 
 import { useNetwork } from "./useNetwork";
@@ -29,8 +29,8 @@ export function useProfile(address: string) {
   const { rpcUrl, contractId } = useNetwork();
   const { address: me } = useWallet();
 
-  const clientRef = useRef<KovaraClient | null>(null);
-  clientRef.current = clientRef.current ?? new KovaraClient({ contractId, rpcUrl });
+  const clientRef = useRef<AssayClient | null>(null);
+  clientRef.current = clientRef.current ?? new AssayClient({ contractId, rpcUrl });
 
   // Every result is tagged with the address it was fetched for so a response
   // that resolves after the route address changed can never be shown for the
@@ -74,7 +74,7 @@ export function useProfile(address: string) {
     }));
     const isStale = () => requestId !== latestRequestRef.current;
     try {
-      const client = clientRef.current as KovaraClient;
+      const client = clientRef.current as AssayClient;
       const p = await client.getProfile(address);
       if (isStale()) return;
       setState({
@@ -137,7 +137,7 @@ export function useProfile(address: string) {
       return;
     }
 
-    const client = clientRef.current as KovaraClient;
+    const client = clientRef.current as AssayClient;
     if (!client) {
       showError("SDK client not available");
       return;
@@ -151,13 +151,13 @@ export function useProfile(address: string) {
       // Try to use an injected wallet kit that can sign/submit
       const kit = (
         globalThis as unknown as {
-          __Kovara_WALLET_KIT__?: {
+          __Assay_WALLET_KIT__?: {
             signAndSubmitTransaction: (opts: {
               txXdr: string;
             }) => Promise<{ hash?: string; txHash?: string }>;
           };
         }
-      ).__Kovara_WALLET_KIT__;
+      ).__Assay_WALLET_KIT__;
 
       if (kit && typeof kit.signAndSubmitTransaction === "function") {
         const res = await kit.signAndSubmitTransaction({ txXdr });
@@ -245,7 +245,7 @@ const PROFILE_CONTRACT_ERRORS: Record<number, Omit<ProfileSaveError, "detail">> 
   37: { message: "Username is too short.", field: "username" },
   38: { message: "Username is too long.", field: "username" },
   39: { message: "Username contains characters that aren't allowed.", field: "username" },
-  40: { message: "The creator token can't be the Kovara contract itself.", field: "creatorToken" },
+  40: { message: "The creator token can't be the Assay contract itself.", field: "creatorToken" },
 };
 
 const CONTRACT_ERROR_RE = /Error\(Contract,\s*#(\d+)\)/i;

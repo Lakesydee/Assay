@@ -13,7 +13,7 @@ async function fetchFollowingPage(
 ): Promise<FollowUser[]> {
   const ALL_FOLLOWING: FollowUser[] = [
     { address: "GBCD1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ", username: "rustacean" },
-    { address: "GDEF5678901234ABCDEFGHIJKLMNOPQRSTUVWXYZ", username: "Kovara_fan" },
+    { address: "GDEF5678901234ABCDEFGHIJKLMNOPQRSTUVWXYZ", username: "Assay_fan" },
     { address: "GHIJ1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ", username: "soroban_builder" },
     { address: "GKLM5678901234ABCDEFGHIJKLMNOPQRSTUVWXYZ", username: "defi_explorer" },
     { address: "GNOP1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ", username: "nft_collector" },

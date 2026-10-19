@@ -1,13 +1,13 @@
-# Kovara Social Contract - Event Schema
+# Assay Social Contract - Event Schema
 
-This document defines the canonical event schema for the Kovara Social contract. Indexers and clients should use this as the source of truth for decoding and filtering events.
+This document defines the canonical event schema for the Assay Social contract. Indexers and clients should use this as the source of truth for decoding and filtering events.
 
 ## Versioning Strategy
 
 All events follow a consistent topic structure:
 `(ContractName, EventName, Version)`
 
-- **ContractName**: `Kovara` (Symbol)
+- **ContractName**: `Assay` (Symbol)
 - **EventName**: Descriptive name (Symbol)
 - **Version**: `v1`, `v2`, etc. (Symbol)
 
@@ -17,7 +17,7 @@ When a schema change is required, the version symbol will be incremented. Indexe
 
 Emitted for a validated price observation. Prices are fixed-point integer amounts with scale 100 (two decimal places); clients must not submit floating-point values. A contributor may submit once per `(submitter, item, period)` and must provide at least one unit of stake plus a one-unit deposit in the submitted asset. Submissions are rate-limited to one per 1,728 ledgers per contributor.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `price`
 - **Topic 2**: `v1`
 - **Data Payload**: `PriceSubmittedEvent`
@@ -35,7 +35,7 @@ Emitted for a validated price observation. Prices are fixed-point integer amount
 
 Emitted when a user creates or updates their profile.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `profile`
 - **Topic 2**: `v1`
 - **Data Payload**: `ProfileSetEvent`
@@ -46,7 +46,7 @@ Emitted when a user creates or updates their profile.
 
 Emitted when a user follows another user.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `follow`
 - **Topic 2**: `v1`
 - **Data Payload**: `FollowEvent`
@@ -57,7 +57,7 @@ Emitted when a user follows another user.
 
 Emitted when a user unfollows another user.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `unfollow`
 - **Topic 2**: `v1`
 - **Data Payload**: `UnfollowEvent`
@@ -68,7 +68,7 @@ Emitted when a user unfollows another user.
 
 Emitted when a user blocks another user.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `block`
 - **Topic 2**: `v1`
 - **Data Payload**: `BlockEvent`
@@ -79,7 +79,7 @@ Emitted when a user blocks another user.
 
 Emitted when a user unblocks another user.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `unblock`
 - **Topic 2**: `v1`
 - **Data Payload**: `UnblockEvent`
@@ -90,7 +90,7 @@ Emitted when a user unblocks another user.
 
 Emitted when a new post is successfully created.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `post`
 - **Topic 2**: `v1`
 - **Data Payload**: `PostCreatedEvent`
@@ -101,7 +101,7 @@ Emitted when a new post is successfully created.
 
 Emitted when a post author is tipped.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `tip`
 - **Topic 2**: `v1`
 - **Data Payload**: `TipEvent`
@@ -114,7 +114,7 @@ Emitted when a post author is tipped.
 
 Emitted when a user likes a post.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `like`
 - **Topic 2**: `v1`
 - **Data Payload**: `LikePostEvent`
@@ -125,7 +125,7 @@ Emitted when a user likes a post.
 
 Emitted when the contract WASM is upgraded.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `upgraded`
 - **Topic 2**: `v1`
 - **Data Payload**: `ContractUpgraded`
@@ -172,7 +172,7 @@ Indexers should subscribe to this event to detect unexpected upgrades:
 
 Emitted when a post is deleted by its author.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `post_del`
 - **Topic 2**: `v1`
 - **Data Payload**: `PostDeleted`
@@ -183,7 +183,7 @@ Emitted when a post is deleted by its author.
 
 Emitted when tokens are deposited into a community pool.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `deposit`
 - **Topic 2**: `v1`
 - **Data Payload**: `PoolDepositEvent`
@@ -215,7 +215,7 @@ Emitted when the admin recovers unreserved reward assets.
 
 Emitted when tokens are withdrawn from a community pool.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `withdraw`
 - **Topic 2**: `v1`
 - **Data Payload**: `PoolWithdrawEvent`
@@ -227,7 +227,7 @@ Emitted when tokens are withdrawn from a community pool.
 
 Emitted when a new community pool is created.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `pool_created`
 - **Topic 2**: `v1`
 - **Data Payload**: `PoolCreatedEvent`
@@ -240,7 +240,7 @@ Emitted when a new community pool is created.
 
 Emitted when a new admin is added to a pool.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `admin_add`
 - **Topic 2**: `v1`
 - **Data Payload**: `PoolAdminAddedEvent`
@@ -251,7 +251,7 @@ Emitted when a new admin is added to a pool.
 
 Emitted when an admin is removed from a pool.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `admin_rm`
 - **Topic 2**: `v1`
 - **Data Payload**: `PoolAdminRemovedEvent`
@@ -262,7 +262,7 @@ Emitted when an admin is removed from a pool.
 
 Emitted when a pool's signature threshold is updated.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `threshold`
 - **Topic 2**: `v1`
 - **Data Payload**: `PoolThresholdUpdatedEvent`
@@ -274,7 +274,7 @@ Emitted when a pool's signature threshold is updated.
 
 Emitted when the admin updates the protocol fee.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `fee_updated_event`
 - **Topic 2**: `v1`
 - **Data Payload**: `FeeUpdatedEvent`
@@ -285,7 +285,7 @@ Emitted when the admin updates the protocol fee.
 
 Emitted when the admin updates the protocol treasury address.
 
-- **Topic 0**: `Kovara`
+- **Topic 0**: `Assay`
 - **Topic 1**: `treasury_updated_event`
 - **Topic 2**: `v1`
 - **Data Payload**: `TreasuryUpdatedEvent`
@@ -305,7 +305,7 @@ stellar events --id <CONTRACT_ID> --network testnet --start-ledger <LEDGER_NUM>
 To filter for only `tip` events:
 
 ```bash
-stellar events --id <CONTRACT_ID> --network testnet --topic "Kovara, tip, v1"
+stellar events --id <CONTRACT_ID> --network testnet --topic "Assay, tip, v1"
 ```
 
 ### Using JS SDK
@@ -318,7 +318,7 @@ const events = await server.getEvents({
       contractIds: [CONTRACT_ID],
       topics: [
         [
-          xdr.ScVal.scvSymbol("Kovara").toXDR("base64"),
+          xdr.ScVal.scvSymbol("Assay").toXDR("base64"),
           xdr.ScVal.scvSymbol("tip").toXDR("base64"),
           xdr.ScVal.scvSymbol("v1").toXDR("base64"),
         ],

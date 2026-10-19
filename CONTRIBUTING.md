@@ -1,8 +1,8 @@
-# Contributing to Kovaras
+# Contributing to Assays
 
 Thank you for contributing! This document covers everything you need to go from zero to an open pull request.
 
-> ⭐ **Star the repo** — [Epta-Node/Kovara](https://github.com/Epta-Node/Kovara)
+> ⭐ **Star the repo** — [Epta-Node/Assay](https://github.com/Epta-Node/Assay)
 > 💬 **Join Telegram** — [t.me/+13csp8G4ccRhY2Zk](https://t.me/+13csp8G4ccRhY2Zk)
 >
 > Please introduce yourself in Telegram before opening a PR to avoid duplicate work.
@@ -35,7 +35,7 @@ rustup target add wasm32-unknown-unknown
 ├── packages/
 │   └── contracts/          # Soroban smart contracts (Rust / Cargo workspace)
 │       └── contracts/
-│           └── Kovara-contracts/
+│           └── Assay-contracts/
 │               └── src/
 │                   ├── lib.rs    # Contract implementation
 │                   └── test.rs   # Unit tests
@@ -54,8 +54,8 @@ rustup target add wasm32-unknown-unknown
 
 ```bash
 # 1. Clone your fork
-git clone git@github.com:YOUR-USERNAME/Kovara.git
-cd Kovara
+git clone git@github.com:YOUR-USERNAME/Assay.git
+cd Assay
 
 # 2. Install JS dependencies
 pnpm install
@@ -78,7 +78,7 @@ For more details on running web and mobile tests, see the [Testing Guide](docs/t
 | Contracts (format) | `packages/contracts` | `cargo fmt`                                      |
 | Web (test)         | `packages/web`       | `pnpm --filter web test`                         |
 | Web (E2E)          | `packages/web`       | `pnpm --filter web test:e2e`                     |
-| Mobile (test)      | `apps/mobile`        | `pnpm --filter @Kovara/mobile test`              |
+| Mobile (test)      | `apps/mobile`        | `pnpm --filter @Assay/mobile test`              |
 | Integration tests  | repo root            | `pnpm test:integration`                          |
 | Full lint          | repo root            | `pnpm lint`                                      |
 | Format all         | repo root            | `pnpm format`                                    |
@@ -178,9 +178,9 @@ Before opening a PR:
 
 ## Adding a New Contract Function
 
-1. Implement the function in `packages/contracts/contracts/Kovara-contracts/src/lib.rs`
+1. Implement the function in `packages/contracts/contracts/Assay-contracts/src/lib.rs`
 2. Add `require_auth()` for any state-changing operation
-3. Emit an event for indexer consumers (see [EVENTS.md](packages/contracts/contracts/Kovara-contracts/EVENTS.md))
+3. Emit an event for indexer consumers (see [EVENTS.md](packages/contracts/contracts/Assay-contracts/EVENTS.md))
 4. Write unit tests in `src/test.rs`
 5. Update the API Reference table in `README.md`
 6. Add a changelog entry in `CHANGELOG.md`

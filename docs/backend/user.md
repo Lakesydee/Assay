@@ -1,4 +1,4 @@
-# Kovara backend — operational runbook
+# Assay backend — operational runbook
 
 Day-two procedures for the indexer + REST API in `Backend/`. Commands are the ones
 the repository actually provides (`Backend/package.json`, `Backend/Makefile`,
@@ -119,8 +119,8 @@ make docker-clean   # stop and DELETE the pgdata volume
 
 ```bash
 cd Backend
-docker build -t kovara-indexer .
-docker run -p 3000:3000 --env-file .env kovara-indexer
+docker build -t Assay-indexer .
+docker run -p 3000:3000 --env-file .env Assay-indexer
 ```
 
 The image builds `dist/` in a builder stage, installs production dependencies only

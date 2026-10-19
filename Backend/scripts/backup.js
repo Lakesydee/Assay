@@ -6,8 +6,8 @@
  *
  * Writes two files into the output directory (default `./backups`):
  *
- *   kovara-<timestamp>.dump      the pg_dump output
- *   kovara-<timestamp>.manifest.json   the manifest (checksum + row counts)
+ *   Assay-<timestamp>.dump      the pg_dump output
+ *   Assay-<timestamp>.manifest.json   the manifest (checksum + row counts)
  *
  * The manifest is what makes the backup a controlled process rather than a
  * file: `scripts/validate-backup.js` re-checks the checksum, and
@@ -47,7 +47,7 @@ function main() {
   const databaseUrl = requireDatabaseUrl();
 
   const stamp = new Date().toISOString().replace(/[:.]/g, "-");
-  const base = path.join(args.out, `kovara-${stamp}`);
+  const base = path.join(args.out, `Assay-${stamp}`);
   const dumpPath = `${base}.dump`;
   const manifestPath = `${base}.manifest.json`;
 

@@ -1,4 +1,4 @@
-import { KovaraClient } from "../../../packages/sdk/src/client";
+import { AssayClient } from "../../../packages/sdk/src/client";
 import type { WalletKitAdapter } from "../types/walletContext.types";
 
 export interface CreatePostResult {
@@ -23,7 +23,7 @@ export async function sdkCreatePost(
     );
   }
 
-  const client = new KovaraClient({ contractId, rpcUrl });
+  const client = new AssayClient({ contractId, rpcUrl });
   const txXdr = client.createPost(author, content);
 
   let txHash: string;

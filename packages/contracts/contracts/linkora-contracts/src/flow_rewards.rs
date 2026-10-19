@@ -8,7 +8,7 @@
 /// produce named `ContractError` variants on overflow/underflow (CT-022).
 use soroban_sdk::{contractevent, contractimpl, panic_with_error, symbol_short, token, Address, Env, Symbol};
 
-use crate::{ContractError, KovaraContract, RewardAssetConfig, RewardRole, StorageKey};
+use crate::{ContractError, AssayContract, RewardAssetConfig, RewardRole, StorageKey};
 
 // ── Events ────────────────────────────────────────────────────────────────────
 
@@ -59,11 +59,11 @@ pub enum VoteError {
 }
 
 #[contractimpl]
-impl KovaraContract {
+impl AssayContract {
 // ── Implementation ────────────────────────────────────────────────────────────
 
 #[contractimpl]
-impl KovaraContract {
+impl AssayContract {
     // ── Reward accrual ────────────────────────────────────────────────────────
 
     /// Credit `amount` tokens of `token` to `recipient` under `role`.

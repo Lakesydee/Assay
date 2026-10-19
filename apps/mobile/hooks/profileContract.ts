@@ -1,4 +1,4 @@
-import { KovaraClient } from "../../../packages/sdk/src/client";
+import { AssayClient } from "../../../packages/sdk/src/client";
 
 type WalletKitLike = {
   signAndSubmitTransaction?: (opts: { txXdr: string; rpcUrl?: string }) => Promise<{ hash?: string; txHash?: string }>;
@@ -13,7 +13,7 @@ export async function submitProfileTransaction(
   rpcUrl: string,
   contractId: string
 ): Promise<string> {
-  const client = new KovaraClient({ contractId, rpcUrl });
+  const client = new AssayClient({ contractId, rpcUrl });
   const xdrEnv = client.setProfile(user, username, creatorToken);
   if (bannerUrl.trim()) {
     console.info("Profile banner URL captured", bannerUrl);
@@ -21,9 +21,9 @@ export async function submitProfileTransaction(
 
   const kit = (
     globalThis as unknown as {
-      __Kovara_WALLET_KIT__?: WalletKitLike;
+      __Assay_WALLET_KIT__?: WalletKitLike;
     }
-  ).__Kovara_WALLET_KIT__;
+  ).__Assay_WALLET_KIT__;
 
   if (kit?.signAndSubmitTransaction) {
     const res = await kit.signAndSubmitTransaction({ txXdr: xdrEnv, rpcUrl });

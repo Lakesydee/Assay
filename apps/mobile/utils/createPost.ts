@@ -1,4 +1,4 @@
-import { KovaraClient } from "../../../packages/sdk/src/client";
+import { AssayClient } from "../../../packages/sdk/src/client";
 
 interface WalletKit {
   signAndSubmitTransaction?: (opts: {
@@ -28,11 +28,11 @@ export async function createPost(opts: CreatePostOptions): Promise<string> {
     );
   }
 
-  const client = new KovaraClient({ contractId, rpcUrl });
+  const client = new AssayClient({ contractId, rpcUrl });
   const txXdr = client.createPost(author, content);
 
-  const kit = (globalThis as unknown as { __Kovara_WALLET_KIT__?: WalletKit })
-    .__Kovara_WALLET_KIT__;
+  const kit = (globalThis as unknown as { __Assay_WALLET_KIT__?: WalletKit })
+    .__Assay_WALLET_KIT__;
   if (!kit) throw new Error("Wallet not connected");
 
   if (typeof kit.signAndSubmitTransaction === "function") {

@@ -18,7 +18,7 @@
  *     for a given event. Deriving it means a caller cannot accidentally (or
  *     deliberately) reuse a key across two different events, which would make
  *     the second event a silent no-op.
- *   - The key is **namespaced by version** (`kovara:event:v1:…`). If the
+ *   - The key is **namespaced by version** (`Assay:event:v1:…`). If the
  *     identity of an event ever changes — a new discriminator is added, or the
  *     contract moves to a new deployment — the version suffix changes and old
  *     rows are ignored rather than misread as already-processed.
@@ -38,7 +38,7 @@
 export const IDEMPOTENCY_KEY_VERSION = "v1";
 
 /** Prefix every key carries, so keys are greppable in the database. */
-export const IDEMPOTENCY_KEY_PREFIX = "kovara:event";
+export const IDEMPOTENCY_KEY_PREFIX = "Assay:event";
 
 /**
  * Maximum accepted length of an idempotency key. Derived keys are well under

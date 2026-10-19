@@ -1,7 +1,7 @@
 export const RESERVED_USERNAMES = [
   'admin',
   'administrator',
-  'kovara',
+  'Assay',
   'support',
   'api',
   'system',

@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Kovara",
-    "slug": "Kovara-mobile",
-    "scheme": "Kovara",
+    "name": "Assay",
+    "slug": "assay-mobile",
+    "scheme": "assay",
     "userInterfaceStyle": "dark"
   }
 }

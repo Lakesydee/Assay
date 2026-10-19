@@ -133,7 +133,7 @@ export async function validatePoolAndToken(
 // Global wallet kit reference (set by WalletContext) — same pattern as useTip.
 declare global {
   // eslint-disable-next-line no-var, @typescript-eslint/no-explicit-any
-  var __Kovara_WALLET_KIT__: any;
+  var __Assay_WALLET_KIT__: any;
 }
 
 /**
@@ -176,7 +176,7 @@ export function usePoolDeposit(): UsePoolDepositReturn {
           throw new Error(validationResult.error);
         }
 
-        const walletKit = globalThis.__Kovara_WALLET_KIT__;
+        const walletKit = globalThis.__Assay_WALLET_KIT__;
         if (!walletKit) {
           throw new Error("Wallet not initialized. Please reconnect.");
         }

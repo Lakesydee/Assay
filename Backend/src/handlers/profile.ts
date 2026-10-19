@@ -28,7 +28,7 @@ export function validateProfileEvent(event: unknown): asserts event is ProfileSe
 }
 
 /**
- * Handle a ProfileSet event emitted by the Kovara contract.
+ * Handle a ProfileSet event emitted by the Assay contract.
  *
  * Replay safety (BE-07) has two halves, and both are needed:
  *

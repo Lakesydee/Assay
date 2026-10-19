@@ -105,7 +105,7 @@ export default function PostDetailScreen() {
           subtitle={
             parsedId.reason === "missing"
               ? "This link doesn't include a post ID, so there's nothing to open."
-              : "This link doesn't point to a valid post. It may be mistyped or from an older version of Kovara."
+              : "This link doesn't point to a valid post. It may be mistyped or from an older version of Assay."
           }
           actionLabel="Go to feed"
           onAction={goToFeed}

@@ -2,7 +2,7 @@
 //! `PriceVault` — stores raw price submissions keyed by `(country_iso,
 //! category, timestamp)`.
 //!
-//! This is the scaffolding landing pad for the Kovara price vault (CT-001).
+//! This is the scaffolding landing pad for the Assay price vault (CT-001).
 //! It wires the contract to the Soroban SDK and exposes a minimal, safe
 //! submission/read surface so the workspace builds and the storage layout is
 //! in place. Deeper submission semantics are owned by subsequent contract
@@ -119,7 +119,7 @@ use soroban_sdk::{
 //! bound is exclusive so two consecutive non-overlapping windows
 //! `[t, t+w)` and `[t+w, t+2w)` share no overlap.
 //!
-//! The `KovaraIndex` aggregation logic — and any sentinel daemon — must
+//! The `AssayIndex` aggregation logic — and any sentinel daemon — must
 //! call `is_valid_at` (or perform equivalent bounds checks) before
 //! incorporating a price submission into an index update, to satisfy the
 //! "expired entries are excluded" requirement.

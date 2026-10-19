@@ -8,9 +8,9 @@ const DEFAULT_APPS: MiniApp[] = [
   {
     id: "tip-jar",
     name: "Tip Jar",
-    description: "Tip any Kovara post with XLM using your connected wallet.",
+    description: "Tip any Assay post with XLM using your connected wallet.",
     icon: "",
-    entry: "https://Kovara.github.io/mini-apps/tip-jar/index.html",
+    entry: "https://Assay.github.io/mini-apps/tip-jar/index.html",
     permissions: ["wallet.getAddress", "wallet.signTransaction"],
   },
   {
@@ -18,7 +18,7 @@ const DEFAULT_APPS: MiniApp[] = [
     name: "Poll Maker",
     description: "Create and vote on polls in your community.",
     icon: "",
-    entry: "https://Kovara.github.io/mini-apps/poll-maker/index.html",
+    entry: "https://Assay.github.io/mini-apps/poll-maker/index.html",
     permissions: ["wallet.getAddress"],
   },
 ];
@@ -30,7 +30,7 @@ const AVAILABLE_APPS: MiniApp[] = [
     name: "Mini Gallery",
     description: "Showcase your NFT collection in a beautiful grid.",
     icon: "",
-    entry: "https://Kovara.github.io/mini-apps/mini-gallery/index.html",
+    entry: "https://Assay.github.io/mini-apps/mini-gallery/index.html",
     permissions: ["wallet.getAddress"],
   },
   {
@@ -38,7 +38,7 @@ const AVAILABLE_APPS: MiniApp[] = [
     name: "Event Brite",
     description: "Discover and RSVP to community events.",
     icon: "",
-    entry: "https://Kovara.github.io/mini-apps/event-brite/index.html",
+    entry: "https://Assay.github.io/mini-apps/event-brite/index.html",
     permissions: ["wallet.getAddress", "wallet.signTransaction"],
   },
 ];

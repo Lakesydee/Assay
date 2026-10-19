@@ -25,7 +25,7 @@ function manifest(overrides: Partial<BackupManifest> = {}): BackupManifest {
   return {
     manifestVersion: MANIFEST_VERSION,
     createdAt: "2026-01-01T00:00:00.000Z",
-    database: "Kovara",
+    database: "Assay",
     format: "custom",
     sha256: sha256(DUMP),
     bytes: DUMP.length,
@@ -41,7 +41,7 @@ describe("buildManifest", () => {
   it("records the checksum, size and database of the dump", () => {
     const built = buildManifest({
       createdAt: new Date("2026-01-01T00:00:00.000Z"),
-      database: "Kovara",
+      database: "Assay",
       format: "custom",
       dump: DUMP,
       tables: [{ table: "posts", rows: 3 }],
@@ -49,7 +49,7 @@ describe("buildManifest", () => {
 
     expect(built.sha256).toBe(sha256(DUMP));
     expect(built.bytes).toBe(DUMP.length);
-    expect(built.database).toBe("Kovara");
+    expect(built.database).toBe("Assay");
     expect(built.createdAt).toBe("2026-01-01T00:00:00.000Z");
     expect(built.manifestVersion).toBe(MANIFEST_VERSION);
   });
@@ -57,7 +57,7 @@ describe("buildManifest", () => {
   it("sorts tables by name so two backups of the same data are byte-identical", () => {
     const built = buildManifest({
       createdAt: new Date("2026-01-01T00:00:00.000Z"),
-      database: "Kovara",
+      database: "Assay",
       format: "custom",
       dump: DUMP,
       tables: [

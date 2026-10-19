@@ -47,7 +47,7 @@ export function OnboardingFlow() {
       {/* Hero */}
       <div className="text-center mb-10">
         <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-3">
-          Welcome to <span className="text-violet-500">Kovara</span>
+          Welcome to <span className="text-violet-500">Assay</span>
         </h1>
         <p className="text-[var(--text-muted)] text-lg max-w-md mx-auto">
           A decentralised social layer on Stellar. Connect your wallet to get started.

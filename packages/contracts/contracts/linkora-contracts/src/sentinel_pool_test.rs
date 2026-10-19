@@ -1,6 +1,6 @@
 #![cfg(test)]
 
-use crate::{KovaraContract, KovaraContractClient};
+use crate::{AssayContract, AssayContractClient};
 use soroban_sdk::{
     testutils::{Address as _, Ledger},
     token::{Client as TokenClient, StellarAssetClient},
@@ -10,11 +10,11 @@ use crate::sentinel_pool::{Verdict, Resolution};
 
 // ── Shared setup ──────────────────────────────────────────────────────────────
 
-fn setup_env<'a>() -> (Env, KovaraContractClient<'a>, Address) {
+fn setup_env<'a>() -> (Env, AssayContractClient<'a>, Address) {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
     client.initialize(&admin, &treasury, &500);
@@ -179,8 +179,8 @@ fn test_resolve_already_finalized() {
 fn test_stake_deposit_overflow_is_rejected() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
     client.initialize(&admin, &treasury, &0);
@@ -216,8 +216,8 @@ fn test_stake_deposit_overflow_is_rejected() {
 fn test_stake_deposit_overflow_leaves_state_unchanged() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     client.initialize(&admin, &Address::generate(&env), &0);
 
@@ -260,8 +260,8 @@ fn test_stake_deposit_overflow_leaves_state_unchanged() {
 fn test_stake_withdraw_underflow_is_rejected() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     client.initialize(&Address::generate(&env), &Address::generate(&env), &0);
 
     let verifier = Address::generate(&env);
@@ -280,8 +280,8 @@ fn test_stake_withdraw_underflow_is_rejected() {
 fn test_stake_withdraw_underflow_leaves_state_unchanged() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     client.initialize(&Address::generate(&env), &Address::generate(&env), &0);
 
     let verifier = Address::generate(&env);
@@ -315,8 +315,8 @@ fn test_stake_withdraw_underflow_leaves_state_unchanged() {
 fn test_stake_conservation_across_deposits_and_withdrawals() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     client.initialize(&Address::generate(&env), &Address::generate(&env), &0);
 
     let verifier = Address::generate(&env);
@@ -377,8 +377,8 @@ fn test_stake_conservation_across_deposits_and_withdrawals() {
 fn test_stake_deposit_max_value_succeeds() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     client.initialize(&Address::generate(&env), &Address::generate(&env), &0);
 
     let verifier = Address::generate(&env);
@@ -406,8 +406,8 @@ fn test_stake_deposit_max_value_succeeds() {
 fn test_stake_deposit_zero_is_rejected() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     client.initialize(&Address::generate(&env), &Address::generate(&env), &0);
 
     let verifier = Address::generate(&env);
@@ -426,8 +426,8 @@ fn test_stake_deposit_zero_is_rejected() {
 fn test_stake_withdraw_zero_is_rejected() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     client.initialize(&Address::generate(&env), &Address::generate(&env), &0);
 
     let verifier = Address::generate(&env);
@@ -449,8 +449,8 @@ fn test_stake_withdraw_zero_is_rejected() {
 fn test_stake_withdraw_exact_balance_leaves_zero() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     client.initialize(&Address::generate(&env), &Address::generate(&env), &0);
 
     let verifier = Address::generate(&env);
@@ -485,8 +485,8 @@ fn test_stake_withdraw_exact_balance_leaves_zero() {
 fn test_stake_two_verifiers_independent_conservation() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     client.initialize(&Address::generate(&env), &Address::generate(&env), &0);
 
     let verifier_a = Address::generate(&env);
@@ -540,8 +540,8 @@ fn test_pool_deposit_overflow_is_rejected() {
 
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     client.initialize(&admin, &Address::generate(&env), &0);
 
@@ -572,8 +572,8 @@ fn test_pool_deposit_overflow_leaves_state_unchanged() {
 
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     client.initialize(&admin, &Address::generate(&env), &0);
 
@@ -619,8 +619,8 @@ fn test_pool_withdraw_underflow_is_rejected() {
 
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     client.initialize(&admin, &Address::generate(&env), &0);
 
@@ -649,8 +649,8 @@ fn test_pool_balance_conservation() {
 
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     client.initialize(&admin, &Address::generate(&env), &0);
 

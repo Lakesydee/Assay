@@ -1,4 +1,4 @@
-# Kovara backend — operational runbook
+# Assay backend — operational runbook
 
 Day-two procedures for the indexer + REST API in `Backend/`. Commands are the ones
 the repository actually provides (`Backend/package.json`, `Backend/Makefile`,
@@ -239,8 +239,8 @@ make docker-clean   # stop and DELETE the pgdata volume
 
 ```bash
 cd Backend
-docker build -t kovara-indexer .
-docker run -p 3000:3000 --env-file .env kovara-indexer
+docker build -t Assay-indexer .
+docker run -p 3000:3000 --env-file .env Assay-indexer
 ```
 
 The image builds `dist/` in a builder stage, installs production dependencies only
@@ -400,8 +400,8 @@ This writes two files into `backups/` (override with `--out`):
 
 | File | Contents |
 | --- | --- |
-| `kovara-<timestamp>.dump` | `pg_dump` output (`--format=custom` by default; `--format plain` also supported). |
-| `kovara-<timestamp>.manifest.json` | When/where the dump was taken, its SHA-256 and byte size, and the row count of every tracked table. |
+| `Assay-<timestamp>.dump` | `pg_dump` output (`--format=custom` by default; `--format plain` also supported). |
+| `Assay-<timestamp>.manifest.json` | When/where the dump was taken, its SHA-256 and byte size, and the row count of every tracked table. |
 
 The manifest is what makes the backup verifiable: without it a truncated or
 corrupted dump is indistinguishable from a good one. Keep the dump and its
@@ -415,7 +415,7 @@ so corruption is found before the day it is needed:
 
 ```bash
 cd Backend
-npm run backup:validate -- backups/kovara-<timestamp>.dump backups/kovara-<timestamp>.manifest.json
+npm run backup:validate -- backups/Assay-<timestamp>.dump backups/Assay-<timestamp>.manifest.json
 ```
 
 It re-computes the dump's SHA-256 and size and compares them to the manifest.
@@ -429,7 +429,7 @@ Restore is gated so a bad dump cannot be applied over a live database:
 
 ```bash
 cd Backend
-DATABASE_URL=postgresql://… npm run restore -- backups/kovara-<timestamp>.dump backups/kovara-<timestamp>.manifest.json
+DATABASE_URL=postgresql://… npm run restore -- backups/Assay-<timestamp>.dump backups/Assay-<timestamp>.manifest.json
 ```
 
 The script:

@@ -465,7 +465,7 @@ pub struct QuorumConfigUpdatedEvent {
 // ── Contract ──────────────────────────────────────────────────────────────────
 
 #[contract]
-pub struct KovaraContract;
+pub struct AssayContract;
 
 // ── Validation Helpers ────────────────────────────────────────────────────────
 
@@ -530,7 +530,7 @@ where
 }
 
 #[contractimpl]
-impl KovaraContract {
+impl AssayContract {
     // ── Initialization ────────────────────────────────────────────────────────
 
     /// Initialize the contract. Must be called exactly once before any other

@@ -1,4 +1,4 @@
-import { KovaraClient } from "../../../packages/sdk/src/client";
+import { AssayClient } from "../../../packages/sdk/src/client";
 import type { WalletKitAdapter } from "../types/walletContext.types";
 
 export interface PoolDepositResult {
@@ -34,7 +34,7 @@ export async function sdkPoolDeposit(
     throw new Error("Wallet not connected");
   }
 
-  const client = new KovaraClient({ contractId, rpcUrl });
+  const client = new AssayClient({ contractId, rpcUrl });
   const txXdr = client.poolDeposit(depositor, poolId, token, amount);
 
   let txHash: string;

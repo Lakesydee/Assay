@@ -1,5 +1,5 @@
 /**
- * Production alerting for the Kovara indexer (issue #683).
+ * Production alerting for the Assay indexer (issue #683).
  *
  * The structured logger (BA-039/BA-042) already redacts, deduplicates and
  * counts errors, but everything it produces stays inside the process: an
@@ -347,7 +347,7 @@ export class SentrySink implements AlertSink {
       timestamp: new Date(event.timestamp).getTime() / 1000,
       platform: "node",
       level: event.severity === "critical" ? "fatal" : "error",
-      logger: "kovara.alerting",
+      logger: "Assay.alerting",
       culprit: event.message,
       message: { formatted: event.message },
       fingerprint: [event.fingerprint],
@@ -378,7 +378,7 @@ export class SentrySink implements AlertSink {
       headers: outboundRequestHeaders(
         {
           "Content-Type": "application/json",
-          "X-Sentry-Auth": `Sentry sentry_version=7, sentry_client=kovara-indexer/1.0, sentry_key=${this.dsn.publicKey}`,
+          "X-Sentry-Auth": `Sentry sentry_version=7, sentry_client=Assay-indexer/1.0, sentry_key=${this.dsn.publicKey}`,
         },
         requestIdFromContext(event)
       ),

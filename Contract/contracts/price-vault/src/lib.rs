@@ -6,7 +6,7 @@
 //! A submission is a single cost-of-living observation (bread, rent, transport,
 //! …) made in a given country at a given moment. Each observation carries an
 //! explicit **validity window** and moves through a strict **verification
-//! state machine** before it can be aggregated into the Kovara index.
+//! state machine** before it can be aggregated into the Assay index.
 //!
 //! ```text
 //!                         ┌──────────────► Verified   (terminal)

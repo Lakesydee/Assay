@@ -1,7 +1,7 @@
 /**
  * packages/web/src/config.ts
  *
- * Centralised environment-variable configuration for the Kovara web app.
+ * Centralised environment-variable configuration for the Assay web app.
  * All process.env / NEXT_PUBLIC_* reads live here; the rest of the app
  * imports typed constants instead of reaching for process.env directly.
  *
@@ -100,7 +100,7 @@ function requireEnv(key: string): string {
   }
   
   // ---------------------------------------------------------------------------
-  // Kovara smart-contract addresses
+  // Assay smart-contract addresses
   // ---------------------------------------------------------------------------
   
   /**
@@ -127,10 +127,10 @@ function requireEnv(key: string): string {
   );
   
   /**
-   * On-chain address of the KovaraIndex contract.
+   * On-chain address of the AssayIndex contract.
    */
-  export const KOVARA_INDEX_CONTRACT_ID = requireEnv(
-    "NEXT_PUBLIC_KOVARA_INDEX_CONTRACT_ID"
+  export const Assay_INDEX_CONTRACT_ID = requireEnv(
+    "NEXT_PUBLIC_Assay_INDEX_CONTRACT_ID"
   );
   
   // ---------------------------------------------------------------------------
@@ -155,19 +155,19 @@ function requireEnv(key: string): string {
   );
   
   // ---------------------------------------------------------------------------
-  // Kovara public API
+  // Assay public API
   // ---------------------------------------------------------------------------
   
-  /** Base URL for the @kovara/api REST service */
+  /** Base URL for the @Assay/api REST service */
   export const API_BASE_URL = optionalEnv(
     "NEXT_PUBLIC_API_BASE_URL",
-    "https://api.kovara.io/v1"
+    "https://api.Assay.io/v1"
   );
   
   /** Base URL for the GraphQL endpoint */
   export const GRAPHQL_URL = optionalEnv(
     "NEXT_PUBLIC_GRAPHQL_URL",
-    "https://api.kovara.io/graphql"
+    "https://api.Assay.io/graphql"
   );
   
   // ---------------------------------------------------------------------------

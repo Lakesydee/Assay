@@ -1,5 +1,5 @@
 [package]
-name = "kovara-price-vault"
+name = "Assay-price-vault"
 version = "0.1.0"
 edition = "2021"
 publish = false

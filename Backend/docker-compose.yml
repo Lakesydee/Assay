@@ -5,15 +5,15 @@ services:
     image: postgres:16-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-Kovara}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-Kovara}
-      POSTGRES_DB: ${POSTGRES_DB:-Kovara}
+      POSTGRES_USER: ${POSTGRES_USER:-Assay}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-Assay}
+      POSTGRES_DB: ${POSTGRES_DB:-Assay}
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-Kovara} -d ${POSTGRES_DB:-Kovara}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-Assay} -d ${POSTGRES_DB:-Assay}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -32,7 +32,7 @@ services:
     env_file:
       - .env
     environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER:-Kovara}:${POSTGRES_PASSWORD:-Kovara}@postgres:5432/${POSTGRES_DB:-Kovara}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-Assay}:${POSTGRES_PASSWORD:-Assay}@postgres:5432/${POSTGRES_DB:-Assay}
       HOST: 0.0.0.0
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://localhost:3000/health || exit 1"]

@@ -20,7 +20,7 @@ export function NavBar() {
           href="/"
           className="text-xl font-extrabold tracking-tight text-violet-500 hover:text-violet-400 transition-colors"
         >
-          Kovara
+          Assay
         </Link>
 
         {/* Center: navigation links (post creation route is wallet-gated) */}

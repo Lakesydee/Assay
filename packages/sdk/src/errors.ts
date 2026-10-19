@@ -1,5 +1,5 @@
 /*
- * Typed errors thrown by the indexer client and Kovara SDK helpers.
+ * Typed errors thrown by the indexer client and Assay SDK helpers.
  */
 export class IndexerError extends Error {
   readonly statusCode: number;

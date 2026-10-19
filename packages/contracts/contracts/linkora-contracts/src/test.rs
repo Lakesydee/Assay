@@ -19,9 +19,9 @@ fn make_token(env: &Env) -> Address {
     setup_token(env, &admin)
 }
 
-fn setup_contract(env: &Env) -> (KovaraContractClient<'_>, Address, Address) {
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(env, &contract_id);
+fn setup_contract(env: &Env) -> (AssayContractClient<'_>, Address, Address) {
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(env, &contract_id);
     let admin = Address::generate(env);
     let treasury = Address::generate(env);
     client.initialize(&admin, &treasury, &0);
@@ -182,9 +182,9 @@ fn make_token(env: &Env) -> Address {
     setup_token(env, &admin)
 }
 
-fn setup_contract(env: &Env) -> (KovaraContractClient<'_>, Address, Address) {
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(env, &contract_id);
+fn setup_contract(env: &Env) -> (AssayContractClient<'_>, Address, Address) {
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(env, &contract_id);
     let admin = Address::generate(env);
     let treasury = Address::generate(env);
     client.initialize(&admin, &treasury, &0);
@@ -224,8 +224,8 @@ fn test_username_duplicate_rejected() {
 fn test_get_following_first_page() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let alice = Address::generate(&env);
     let mut followees = soroban_sdk::vec![&env];
@@ -263,9 +263,9 @@ fn make_token(env: &Env) -> Address {
     setup_token(env, &admin)
 }
 
-fn setup_contract(env: &Env) -> (KovaraContractClient<'_>, Address, Address) {
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(env, &contract_id);
+fn setup_contract(env: &Env) -> (AssayContractClient<'_>, Address, Address) {
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(env, &contract_id);
     let admin = Address::generate(env);
     let treasury = Address::generate(env);
     client.initialize(&admin, &treasury, &0);
@@ -289,8 +289,8 @@ fn test_set_and_get_profile() {
 fn test_get_following_second_page() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let alice = Address::generate(&env);
     let mut followees = soroban_sdk::vec![&env];
@@ -312,8 +312,8 @@ fn test_get_following_second_page() {
 fn test_get_following_offset_beyond_end() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let alice = Address::generate(&env);
     let bob = Address::generate(&env);
@@ -329,8 +329,8 @@ fn test_get_following_offset_beyond_end() {
 fn test_get_following_limit_exceeds_maximum() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let alice = Address::generate(&env);
     let bob = Address::generate(&env);
@@ -345,8 +345,8 @@ fn test_get_following_limit_exceeds_maximum() {
 fn test_get_following_zero_limit() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let alice = Address::generate(&env);
     let bob = Address::generate(&env);
@@ -360,8 +360,8 @@ fn test_get_following_zero_limit() {
 fn test_get_posts_by_author_first_page() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let author = Address::generate(&env);
 
@@ -401,8 +401,8 @@ fn test_get_posts_by_author_first_page() {
 fn test_get_following_second_page() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let alice = Address::generate(&env);
     let mut followees = soroban_sdk::vec![&env];
@@ -424,8 +424,8 @@ fn test_get_following_second_page() {
 fn test_get_following_offset_beyond_end() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let alice = Address::generate(&env);
     let bob = Address::generate(&env);
@@ -441,8 +441,8 @@ fn test_get_following_offset_beyond_end() {
 fn test_get_posts_by_author_second_page() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let author = Address::generate(&env);
 
@@ -482,8 +482,8 @@ fn test_get_posts_by_author_second_page() {
 fn test_get_posts_by_author_offset_beyond_end() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let author = Address::generate(&env);
 
@@ -498,8 +498,8 @@ fn test_get_posts_by_author_offset_beyond_end() {
 fn test_get_posts_by_author_limit_exceeds_maximum() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let author = Address::generate(&env);
 
@@ -512,8 +512,8 @@ fn test_get_posts_by_author_limit_exceeds_maximum() {
 fn test_get_posts_by_author_after_delete() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let author = Address::generate(&env);
 
@@ -538,8 +538,8 @@ fn test_price_is_fixed_point_and_emits_complete_event() {
     env.mock_all_auths();
     env.ledger().with_sequence_number(2_000);
     env.ledger().with_timestamp(10_000);
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
     client.initialize(&admin, &treasury, &0);
@@ -559,8 +559,8 @@ fn test_duplicate_price_observation_rejected() {
     env.mock_all_auths();
     env.ledger().with_sequence_number(2_000);
     env.ledger().with_timestamp(10_000);
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     client.initialize(&admin, &Address::generate(&env), &0);
     let submitter = Address::generate(&env);
@@ -594,8 +594,8 @@ fn test_username_same_user_can_reregister_same_name() {
 fn test_get_posts_by_author_offset_beyond_end() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let author = Address::generate(&env);
 
@@ -610,8 +610,8 @@ fn test_get_posts_by_author_offset_beyond_end() {
 fn test_get_posts_by_author_limit_exceeds_maximum() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let author = Address::generate(&env);
 
@@ -624,8 +624,8 @@ fn test_get_posts_by_author_limit_exceeds_maximum() {
 fn test_get_posts_by_author_after_delete() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let author = Address::generate(&env);
 
@@ -648,8 +648,8 @@ fn test_tip_fee_split() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -681,8 +681,8 @@ fn test_tip_rejects_mismatched_creator_token() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -704,8 +704,8 @@ fn test_tip_accepts_matching_creator_token() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -730,8 +730,8 @@ fn test_tip_blocked_by_author() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -755,8 +755,8 @@ fn test_tip_after_unblock() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -786,8 +786,8 @@ fn test_tip_non_blocked_user() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -818,8 +818,8 @@ fn test_tip_zero_amount_rejected() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -841,8 +841,8 @@ fn test_tip_negative_amount_rejected() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -1665,8 +1665,8 @@ fn test_delete_post_non_existent() {
 fn test_initialize_stores_admin() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
 
@@ -1681,8 +1681,8 @@ fn test_initialize_stores_admin() {
 fn test_initialize_twice_panics() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
 
@@ -1753,8 +1753,8 @@ fn test_upgrade_before_initialize_panics() {
     // contract panics with "not initialized" before any WASM lookup occurs.
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let mock_hash = BytesN::from_array(&env, &[0u8; 32]);
     client.upgrade(&mock_hash);
@@ -1825,8 +1825,8 @@ fn test_upgrade_invalid_hash_uninitialized_contract_panics_not_initialized_first
     // guard fires before the host hash-validation step.
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     // Use an all-zeros hash — even if the host accepted it, the contract must
     // reject the call earlier with "not initialized".
@@ -1863,8 +1863,8 @@ fn test_upgrade_before_initialize_ttl_bump_does_not_mask_init_guard() {
     // panic with "not initialized" when the contract has never been initialized.
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let mock_hash = BytesN::from_array(&env, &[0u8; 32]);
     client.upgrade(&mock_hash);
@@ -1877,8 +1877,8 @@ fn test_initialize_fee_boundary_max_valid() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -1894,8 +1894,8 @@ fn test_initialize_fee_boundary_max_invalid() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -2260,8 +2260,8 @@ fn test_get_following_offset_beyond_list_length_returns_empty() {
     // offset beyond list length must return an empty vec
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let alice = Address::generate(&env);
     let bob = Address::generate(&env);
@@ -2281,8 +2281,8 @@ fn test_get_following_limit_50_returns_at_most_50() {
     // limit of 50 must return at most 50 results
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let alice = Address::generate(&env);
     // Follow 60 people
@@ -2302,8 +2302,8 @@ fn test_get_following_limit_51_panics() {
     // limit of 51 must panic with "limit must be between 1 and 50"
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let alice = Address::generate(&env);
     let bob = Address::generate(&env);
@@ -2317,8 +2317,8 @@ fn test_get_following_mid_list_offset_returns_correct_page() {
     // correct page returned for a mid-list offset
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let alice = Address::generate(&env);
     let mut followees = soroban_sdk::vec![&env];
@@ -2346,8 +2346,8 @@ fn test_get_followers_offset_beyond_list_length_returns_empty() {
     // offset beyond list length must return an empty vec
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let alice = Address::generate(&env);
     let bob = Address::generate(&env);
@@ -2366,8 +2366,8 @@ fn test_get_followers_offset_equal_list_length_returns_empty() {
     // offset equal to list length must return an empty vec
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let alice = Address::generate(&env);
     let bob = Address::generate(&env);
@@ -2389,8 +2389,8 @@ fn test_get_followers_limit_50_returns_at_most_50() {
     // limit of 50 must return at most 50 results
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let alice = Address::generate(&env);
     // 60 people follow alice
@@ -2409,8 +2409,8 @@ fn test_get_followers_last_page_truncates_to_remaining_items() {
     // request near the end must return only the remaining followers
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let alice = Address::generate(&env);
     let mut followers = soroban_sdk::vec![&env];
@@ -2432,8 +2432,8 @@ fn test_get_followers_limit_51_panics() {
     // limit of 51 must panic with "limit must be between 1 and 50"
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let alice = Address::generate(&env);
     let bob = Address::generate(&env);
@@ -2447,8 +2447,8 @@ fn test_get_followers_mid_list_offset_returns_correct_page() {
     // correct page returned for a mid-list offset
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let alice = Address::generate(&env);
     let mut followers = soroban_sdk::vec![&env];
@@ -2541,7 +2541,7 @@ fn setup_pool<'a>(
     m: u32,
     balance: i128,
 ) -> (
-    KovaraContractClient<'a>,
+    AssayContractClient<'a>,
     Address,
     soroban_sdk::Symbol,
     Address,
@@ -2752,8 +2752,8 @@ fn test_tip_full_flow_no_fee() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -2796,8 +2796,8 @@ fn test_tip_full_flow_with_5_percent_fee() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -2844,8 +2844,8 @@ fn test_tip_total_increments_across_multiple_tips() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -2880,8 +2880,8 @@ fn test_tip_fee_split_matches_fee_bps_config() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -3318,8 +3318,8 @@ fn test_tip_cooldown_rejects_within_window() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -3343,8 +3343,8 @@ fn test_tip_cooldown_allows_after_window() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -3568,8 +3568,8 @@ fn test_tip_cooldown_uses_typed_storage_key() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -3946,13 +3946,13 @@ fn test_separate_contract_instances_share_no_storage() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let id_a = env.register(KovaraContract, ());
-    let client_a = KovaraContractClient::new(&env, &id_a);
+    let id_a = env.register(AssayContract, ());
+    let client_a = AssayContractClient::new(&env, &id_a);
     let admin_a = Address::generate(&env);
     client_a.initialize(&admin_a, &Address::generate(&env), &0);
 
-    let id_b = env.register(KovaraContract, ());
-    let client_b = KovaraContractClient::new(&env, &id_b);
+    let id_b = env.register(AssayContract, ());
+    let client_b = AssayContractClient::new(&env, &id_b);
     let admin_b = Address::generate(&env);
     client_b.initialize(&admin_b, &Address::generate(&env), &0);
 
@@ -4032,7 +4032,7 @@ fn test_create_post_emits_event() {
     let (client, _, _) = setup_contract(&env);
 
     let author = Address::generate(&env);
-    let content = String::from_str(&env, "Hello Kovara");
+    let content = String::from_str(&env, "Hello Assay");
     let post_id = client.create_post(&author, &content);
 
     // Storage update precedes event emission: the post must be readable.
@@ -4296,8 +4296,8 @@ fn test_set_profile_before_initialize_rejected() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let user = Address::generate(&env);
     let token = make_token(&env);
@@ -4311,8 +4311,8 @@ fn test_create_post_before_initialize_rejected() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let author = Address::generate(&env);
     // Must panic with NotInitialized (#30).
@@ -4325,8 +4325,8 @@ fn test_initialize_twice_rejected() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
@@ -4440,8 +4440,8 @@ fn test_create_pool_before_initialize_rejected() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
 
     let admin = Address::generate(&env);
     let token = make_token(&env);
@@ -4719,8 +4719,8 @@ fn test_duplicate_signers_cannot_bypass_withdrawal_threshold() {
 fn test_accrue_and_query_submitter_reward() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
     client.initialize(&admin, &treasury, &0);
@@ -4753,8 +4753,8 @@ fn test_accrue_and_query_submitter_reward() {
 fn test_accrue_and_query_verifier_reward() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
     client.initialize(&admin, &treasury, &0);
@@ -4773,8 +4773,8 @@ fn test_accrue_and_query_verifier_reward() {
 fn test_submitter_and_verifier_balances_are_independent() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
     client.initialize(&admin, &treasury, &0);
@@ -4799,8 +4799,8 @@ fn test_submitter_and_verifier_balances_are_independent() {
 fn test_claim_reward_transfers_tokens_and_resets_balance() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
     client.initialize(&admin, &treasury, &0);
@@ -4834,8 +4834,8 @@ fn test_claim_reward_transfers_tokens_and_resets_balance() {
 fn test_claim_reward_twice_only_pays_once() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
     client.initialize(&admin, &treasury, &0);
@@ -4862,8 +4862,8 @@ fn test_claim_reward_twice_only_pays_once() {
 fn test_claim_with_no_balance_panics() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
     client.initialize(&admin, &treasury, &0);
@@ -4880,8 +4880,8 @@ fn test_claim_with_no_balance_panics() {
 fn test_accrue_zero_amount_panics() {
     let env = Env::default();
     env.mock_all_auths();
-    let contract_id = env.register(KovaraContract, ());
-    let client = KovaraContractClient::new(&env, &contract_id);
+    let contract_id = env.register(AssayContract, ());
+    let client = AssayContractClient::new(&env, &contract_id);
     let admin = Address::generate(&env);
     let treasury = Address::generate(&env);
     client.initialize(&admin, &treasury, &0);

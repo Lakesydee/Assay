@@ -42,7 +42,7 @@ const PROTOCOL_FEE_BPS = 100;
 // Global wallet kit reference (set by WalletContext)
 declare global {
   // eslint-disable-next-line no-var, @typescript-eslint/no-explicit-any
-  var __Kovara_WALLET_KIT__: any;
+  var __Assay_WALLET_KIT__: any;
 }
 
 export function useTip(): UseTipResult {
@@ -89,7 +89,7 @@ export function useTip(): UseTipResult {
         return false;
       }
 
-      const walletKit = globalThis.__Kovara_WALLET_KIT__;
+      const walletKit = globalThis.__Assay_WALLET_KIT__;
       if (!walletKit) {
         const message = "Wallet not initialized. Please reconnect.";
         setStatus("error");
