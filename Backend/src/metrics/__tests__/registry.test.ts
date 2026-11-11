@@ -126,6 +126,12 @@ describe("MetricsRegistry / Prometheus exposition", () => {
 });
 
 describe("MetricsRegistry / cardinality guard", () => {
+  it("requires a positive safe-integer series cap", () => {
+    for (const maxSeries of [0, -1, 1.5, Number.NaN, Number.POSITIVE_INFINITY]) {
+      expect(() => new MetricsRegistry([], { maxSeries })).toThrow(/positive safe integer/);
+    }
+  });
+
   it("drops new series past the cap and counts the drops", () => {
     // A single labelled counter, so the only eager series is the drop counter.
     const r = new MetricsRegistry(

@@ -138,7 +138,11 @@ export class MetricsRegistry {
   private readonly maxSeries: number;
 
   constructor(definitions: MetricDefinition[] = [], options: MetricsRegistryOptions = {}) {
-    this.maxSeries = options.maxSeries ?? 1000;
+    const maxSeries = options.maxSeries ?? 1000;
+    if (!Number.isSafeInteger(maxSeries) || maxSeries < 1) {
+      throw new RangeError("maxSeries must be a positive safe integer");
+    }
+    this.maxSeries = maxSeries;
     const dropped: MetricDefinition = {
       name: "metrics_series_dropped_total",
       type: "counter",
