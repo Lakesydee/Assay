@@ -5,10 +5,10 @@
     "dev": "turbo run dev",
     "dev:contracts": "pnpm --filter contracts dev",
     "build": "turbo run build",
-    "build:contracts": "pnpm --filter contracts build",
+    "build:contracts": "cd Contract && cargo build --workspace",
     "lint": "turbo run lint",
     "test": "turbo run test",
-    "test:integration": "pnpm --filter contracts test:integration",
+    "test:integration": "npm --prefix Backend test -- --runInBand postgres.integration",
     "format": "turbo run format",
     "prepare": "husky"
   },
@@ -34,7 +34,7 @@
       "prettier --write"
     ],
     "*.rs": [
-      "bash -c 'cd packages/contracts && cargo fmt'"
+      "bash -c 'cd Contract && cargo fmt --all'"
     ]
   },
   "packageManager": "pnpm@9.15.9"

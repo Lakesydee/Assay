@@ -39,6 +39,11 @@ describe("decodeStellarBase64", () => {
   it("rejects a length no base64 string can have", () => {
     expect(() => decodeStellarBase64("A")).toThrow(NormalizationError);
   });
+
+  it("rejects invalid alphabet characters and padding", () => {
+    expect(() => decodeStellarBase64("!!!")).toThrow(NormalizationError);
+    expect(() => decodeStellarBase64("a=")).toThrow(NormalizationError);
+  });
 });
 
 describe("stroopsToUnits", () => {
@@ -68,6 +73,7 @@ describe("isStellarAddress", () => {
   it("rejects anything else", () => {
     expect(isStellarAddress("GABC")).toBe(false);
     expect(isStellarAddress("S" + ADDRESS_A.slice(1))).toBe(false);
+    expect(isStellarAddress(`G${"0".repeat(55)}`)).toBe(false);
     expect(isStellarAddress(undefined)).toBe(false);
     expect(isStellarAddress(42)).toBe(false);
   });
@@ -81,6 +87,10 @@ describe("resolveStatus", () => {
   it("reads an explicit status", () => {
     expect(resolveStatus({ status: "failed" })).toBe("failed");
     expect(resolveStatus({ status: "SUCCESS" })).toBe("success");
+  });
+
+  it("fails closed for an unrecognized explicit status", () => {
+    expect(resolveStatus({ status: "pending" })).toBe("failed");
   });
 
   it("infers failure from errorResult", () => {
@@ -149,9 +159,12 @@ describe("normalizeStellarEvent", () => {
     expect(() => normalizeStellarEvent("nope")).toThrow(NormalizationError);
   });
 
-  it("rejects a negative or fractional ledger", () => {
+  it("rejects non-positive, blank, or fractional ledgers", () => {
+    expect(() => normalizeStellarEvent({ id: "e1", ledger: 0 })).toThrow(NormalizationError);
     expect(() => normalizeStellarEvent({ id: "e1", ledger: -1 })).toThrow(NormalizationError);
     expect(() => normalizeStellarEvent({ id: "e1", ledger: 1.5 })).toThrow(NormalizationError);
+    expect(() => normalizeStellarEvent({ id: "e1", ledger: null })).toThrow(NormalizationError);
+    expect(() => normalizeStellarEvent({ id: "e1", ledger: " " })).toThrow(NormalizationError);
   });
 });
 

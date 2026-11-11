@@ -47,6 +47,13 @@ describe("MetricsRegistry / counters", () => {
     expect(() =>
       r.define({ ...DEFS[0], labelNames: ["route"] })
     ).toThrow(/already defined with a different definition/);
+  it("rejects negative and non-finite increments without creating a series", () => {
+    const r = registry();
+    const initialSeries = r.seriesCount();
+
+    expect(() => r.increment("requests_total", { method: "GET", route: "/a" }, -1)).toThrow();
+    expect(() => r.increment("requests_total", { method: "GET", route: "/a" }, Number.NaN)).toThrow();
+    expect(r.seriesCount()).toBe(initialSeries);
   });
 });
 
@@ -56,6 +63,14 @@ describe("MetricsRegistry / gauges", () => {
     r.setGauge("queue_depth", 4);
     r.setGauge("queue_depth", 2);
     expect(r.snapshot().gauges.find((g) => g.name === "queue_depth")?.value).toBe(2);
+  });
+
+  it("rejects non-finite values without creating a series", () => {
+    const r = registry();
+    const initialValue = r.snapshot().gauges.find((g) => g.name === "queue_depth")?.value;
+
+    expect(() => r.setGauge("queue_depth", Number.POSITIVE_INFINITY)).toThrow();
+    expect(r.snapshot().gauges.find((g) => g.name === "queue_depth")?.value).toBe(initialValue);
   });
 });
 
@@ -91,6 +106,14 @@ describe("MetricsRegistry / histograms", () => {
       { le: 10, count: 0 },
       { le: "+Inf", count: 1 },
     ]);
+  });
+
+  it("rejects non-finite observations without creating a series", () => {
+    const r = registry();
+    const initialSeries = r.seriesCount();
+
+    expect(() => r.observe("latency_ms", Number.NaN, { route: "/a" })).toThrow();
+    expect(r.seriesCount()).toBe(initialSeries);
   });
 
   it("reports 0 for min/max on an unobserved bucket set", () => {

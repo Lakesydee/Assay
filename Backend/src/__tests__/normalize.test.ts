@@ -15,6 +15,7 @@ describe("price and event normalization (#667)", () => {
     expect(normalizeAmount(" +000900719925474099312345 ")).toBe("900719925474099312345");
     expect(normalizeAmount(-12.9)).toBe("-12");
     expect(normalizeAmount(12n)).toBe("12");
+    expect(() => normalizeAmount(Number.MAX_SAFE_INTEGER + 1)).toThrow(/safe integer/);
     for (const invalid of ["", "1.2", "NaN", "Infinity"]) {
       expect(() => normalizeAmount(invalid)).toThrow();
     }

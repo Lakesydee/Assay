@@ -192,18 +192,27 @@ export class MetricsRegistry {
 
   increment(name: string, labels?: LabelSet, by = 1): void {
     const definition = this.definitionFor(name, "counter");
+    if (!Number.isFinite(by) || by < 0) {
+      throw new RangeError(`counter ${name} increment must be a finite non-negative number`);
+    }
     const series = this.getOrCreate(definition, labels);
     if (series) series.value += by;
   }
 
   setGauge(name: string, value: number, labels?: LabelSet): void {
     const definition = this.definitionFor(name, "gauge");
+    if (!Number.isFinite(value)) {
+      throw new RangeError(`gauge ${name} value must be finite`);
+    }
     const series = this.getOrCreate(definition, labels);
     if (series) series.value = value;
   }
 
   observe(name: string, value: number, labels?: LabelSet): void {
     const definition = this.definitionFor(name, "histogram");
+    if (!Number.isFinite(value)) {
+      throw new RangeError(`histogram ${name} observation must be finite`);
+    }
     const series = this.getOrCreate(definition, labels);
     if (!series) return;
     series.count += 1;

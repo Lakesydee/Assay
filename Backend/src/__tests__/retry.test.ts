@@ -170,6 +170,35 @@ describe("withRetry", () => {
     expect(fn).toHaveBeenCalledTimes(1);
   });
 
+  it("interrupts the backoff wait when the signal aborts", async () => {
+    jest.useFakeTimers();
+    try {
+      const controller = new AbortController();
+      const fn = jest.fn().mockRejectedValue(new Error("socket hang up"));
+      const pending = withRetry(fn, {
+        maxAttempts: 5,
+        log: makeLog(),
+        baseDelayMs: 10_000,
+        jitter: false,
+        signal: controller.signal,
+      });
+      const rejection = expect(pending).rejects.toThrow(/socket hang up/);
+
+      await jest.advanceTimersByTimeAsync(0);
+      expect(jest.getTimerCount()).toBe(1);
+
+      controller.abort();
+      const timersAfterAbort = jest.getTimerCount();
+      await jest.advanceTimersByTimeAsync(10_000);
+      await rejection;
+
+      expect(timersAfterAbort).toBe(0);
+      expect(fn).toHaveBeenCalledTimes(1);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
   it("clamps a zero or negative attempt budget to a single attempt", async () => {
     const fn = jest.fn().mockRejectedValue(new Error("connection terminated"));
     const log = makeLog();
@@ -178,6 +207,15 @@ describe("withRetry", () => {
       withRetry(fn, { maxAttempts: 0, log, sleep: noSleep })
     ).rejects.toThrow(/connection terminated/);
     expect(fn).toHaveBeenCalledTimes(1);
+  });
+
+  it("rejects non-finite attempt budgets before running the operation", async () => {
+    for (const maxAttempts of [Number.NaN, Number.POSITIVE_INFINITY]) {
+      const fn = jest.fn().mockRejectedValue(new Error("RPC request failed: 400 Bad Request"));
+
+      await expect(withRetry(fn, { maxAttempts, log: makeLog() })).rejects.toThrow(/maxAttempts/);
+      expect(fn).not.toHaveBeenCalled();
+    }
   });
 
   it("passes the abort signal through to a non-retryable caller without throwing early", async () => {

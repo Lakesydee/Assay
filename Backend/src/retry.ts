@@ -327,8 +327,8 @@ export interface RetryOptions {
   log?: RetryLogger;
   /** Abort signal; rejects the wait between attempts when aborted. */
   signal?: AbortSignal;
-  /** Injectable sleep, for tests. */
-  sleep?: (ms: number) => Promise<void>;
+  /** Injectable sleep, for tests. Receives the retry abort signal when present. */
+  sleep?: (ms: number, signal?: AbortSignal) => Promise<void>;
 }
 
 /** The subset of the logger this module needs. */
@@ -337,8 +337,17 @@ export interface RetryLogger {
   error(message: string, ...args: unknown[]): void;
 }
 
-const sleep = (ms: number): Promise<void> =>
-  new Promise((resolve) => setTimeout(resolve, ms));
+const sleep = (ms: number, signal?: AbortSignal): Promise<void> =>
+  new Promise((resolve) => {
+    const timer = setTimeout(finish, ms);
+    signal?.addEventListener("abort", finish, { once: true });
+
+    function finish() {
+      clearTimeout(timer);
+      signal?.removeEventListener("abort", finish);
+      resolve();
+    }
+  });
 
 /** Render a thrown value for a log line. */
 function describe(err: unknown): string {
@@ -410,6 +419,9 @@ export async function withRetry<T>(fn: () => Promise<T>, opts: RetryOptions = {}
   // A retry budget below 1 would mean "never attempt", which cannot return a
   // value and has no error to rethrow. Clamp to 1 and let the call fail
   // normally on the single attempt.
+  if (!Number.isFinite(maxAttempts)) {
+    throw new RangeError("withRetry: maxAttempts must be finite");
+  }
   const attempts = Math.max(1, Math.floor(maxAttempts));
   let lastError: unknown;
 
@@ -459,7 +471,7 @@ export async function withRetry<T>(fn: () => Promise<T>, opts: RetryOptions = {}
       });
 
       if (signal?.aborted) throw err;
-      await sleepFn(delay);
+      await sleepFn(delay, signal);
     }
   }
 

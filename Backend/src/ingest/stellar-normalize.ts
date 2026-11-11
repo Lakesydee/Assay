@@ -62,7 +62,7 @@ export class NormalizationError extends Error {
 }
 
 /** Stellar strkey: a 56-character base-32 public key starting with `G`. */
-const STELLAR_ADDRESS_RE = /^G[A-Z0-9]{55}$/;
+const STELLAR_ADDRESS_RE = /^G[A-Z2-7]{55}$/;
 
 const STROOPS_PER_UNIT = 10_000_000;
 
@@ -79,11 +79,19 @@ const FRACTIONAL_DIGITS = STROOPS_PER_UNIT.toString().length - 1;
  * makes the value decodable by `Buffer`.
  */
 export function decodeStellarBase64(value: string): string {
+  if (!/^[A-Za-z0-9+/_-]*={0,2}$/.test(value)) {
+    throw new NormalizationError("value is not valid base64", "value");
+  }
   const standard = value.replace(/-/g, "+").replace(/_/g, "/");
   const unpadded = standard.replace(/=+$/, "");
   const remainder = unpadded.length % 4;
   // A length of 1 mod 4 cannot be produced by base64 at all.
   if (remainder === 1) {
+    throw new NormalizationError("value is not valid base64", "value");
+  }
+  const padding = standard.length - unpadded.length;
+  const expectedPadding = (4 - remainder) % 4;
+  if (padding > 0 && (standard.length % 4 !== 0 || padding !== expectedPadding)) {
     throw new NormalizationError("value is not valid base64", "value");
   }
   const padded = remainder === 0 ? unpadded : unpadded + "=".repeat(4 - remainder);
@@ -156,7 +164,9 @@ function parseIntegerString(value: string): bigint | null {
 export function resolveStatus(raw: Record<string, unknown>): TxStatus {
   const status = raw.status;
   if (typeof status === "string") {
-    return status.toLowerCase() === "failed" ? "failed" : "success";
+    const normalized = status.trim().toLowerCase();
+    if (normalized === "failed") return "failed";
+    return normalized === "success" ? "success" : "failed";
   }
   if (raw.errorResult !== undefined && raw.errorResult !== null) {
     return "failed";
@@ -225,8 +235,14 @@ export function normalizeStellarEvent(
   }
 
   const ledger = raw.ledger;
-  const ledgerNumber = typeof ledger === "number" ? ledger : Number(ledger);
-  if (!Number.isInteger(ledgerNumber) || ledgerNumber < 0) {
+  const ledgerText = typeof ledger === "string" ? ledger.trim() : "";
+  const ledgerNumber =
+    typeof ledger === "number"
+      ? ledger
+      : /^\d+$/.test(ledgerText)
+        ? Number(ledgerText)
+        : Number.NaN;
+  if (!Number.isSafeInteger(ledgerNumber) || ledgerNumber <= 0) {
     throw new NormalizationError(`event ${eventId} has an invalid ledger`, "ledger");
   }
 
