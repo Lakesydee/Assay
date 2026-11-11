@@ -34,7 +34,7 @@
       "prettier --write"
     ],
     "*.rs": [
-      "bash -c 'cd packages/contracts && cargo fmt'"
+      "bash -c 'cd Contract && cargo fmt --all'"
     ]
   },
   "packageManager": "pnpm@9.15.9"
