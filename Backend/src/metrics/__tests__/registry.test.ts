@@ -42,6 +42,11 @@ describe("MetricsRegistry / counters", () => {
     expect(() => registry().increment("queue_depth")).toThrow(/not a counter/);
   });
 
+  it("rejects a redefinition with different labels", () => {
+    const r = registry();
+    expect(() =>
+      r.define({ ...DEFS[0], labelNames: ["route"] })
+    ).toThrow(/already defined with a different definition/);
   it("rejects negative and non-finite increments without creating a series", () => {
     const r = registry();
     const initialSeries = r.seriesCount();
