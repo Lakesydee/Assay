@@ -158,6 +158,16 @@ export class MetricsRegistry {
           `metric ${definition.name} already defined as ${existing.type}, cannot redefine as ${definition.type}`
         );
       }
+      const labelsMatch =
+        existing.labelNames.length === definition.labelNames.length &&
+        existing.labelNames.every((name, index) => name === definition.labelNames[index]);
+      const bucketsMatch =
+        existing.type !== "histogram" ||
+        (existing.buckets?.length === definition.buckets?.length &&
+          existing.buckets?.every((bucket, index) => bucket === definition.buckets?.[index]));
+      if (existing.help !== definition.help || !labelsMatch || !bucketsMatch) {
+        throw new Error(`metric ${definition.name} already defined with a different definition`);
+      }
       return;
     }
     this.definitions.set(definition.name, definition);

@@ -41,6 +41,13 @@ describe("MetricsRegistry / counters", () => {
   it("throws when the metric exists with a different type", () => {
     expect(() => registry().increment("queue_depth")).toThrow(/not a counter/);
   });
+
+  it("rejects a redefinition with different labels", () => {
+    const r = registry();
+    expect(() =>
+      r.define({ ...DEFS[0], labelNames: ["route"] })
+    ).toThrow(/already defined with a different definition/);
+  });
 });
 
 describe("MetricsRegistry / gauges", () => {
