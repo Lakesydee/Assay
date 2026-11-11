@@ -5,7 +5,7 @@
     "dev": "turbo run dev",
     "dev:contracts": "pnpm --filter contracts dev",
     "build": "turbo run build",
-    "build:contracts": "pnpm --filter contracts build",
+    "build:contracts": "cd Contract && cargo build --workspace",
     "lint": "turbo run lint",
     "test": "turbo run test",
     "test:integration": "npm --prefix Backend test -- --runInBand postgres.integration",
