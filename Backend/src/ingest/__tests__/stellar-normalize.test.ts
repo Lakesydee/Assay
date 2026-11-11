@@ -68,6 +68,7 @@ describe("isStellarAddress", () => {
   it("rejects anything else", () => {
     expect(isStellarAddress("GABC")).toBe(false);
     expect(isStellarAddress("S" + ADDRESS_A.slice(1))).toBe(false);
+    expect(isStellarAddress(`G${"0".repeat(55)}`)).toBe(false);
     expect(isStellarAddress(undefined)).toBe(false);
     expect(isStellarAddress(42)).toBe(false);
   });
