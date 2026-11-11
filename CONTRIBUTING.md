@@ -32,16 +32,15 @@ rustup target add wasm32-unknown-unknown
 
 ```text
 .
+├── Contract/               # Soroban smart contracts (Rust / Cargo workspace)
+│   └── contracts/
+├── Backend/                # API and scan orchestration service
+├── apps/
+│   ├── web/                # Next.js web app
+│   └── mobile/             # Expo mobile app
 ├── packages/
-│   └── contracts/          # Soroban smart contracts (Rust / Cargo workspace)
-│       └── contracts/
-│           └── Assay-contracts/
-│               └── src/
-│                   ├── lib.rs    # Contract implementation
-│                   └── test.rs   # Unit tests
+│   └── sdk/                # Shared TypeScript SDK
 ├── docs/                   # Architecture, design, and indexer specs
-├── scripts/                # Setup, deploy, and release scripts
-├── tests/                  # Sandbox-backed integration tests
 ├── .github/                # CI workflows, issue/PR templates, CODEOWNERS
 ├── Makefile
 ├── turbo.json
@@ -61,27 +60,26 @@ cd Assay
 pnpm install
 
 # 3. Build contracts
-pnpm build:contracts
+cd Contract && cargo build --workspace && cd ..
 
 # 4. Run unit tests
-pnpm --filter contracts test
-
-For more details on running web and mobile tests, see the [Testing Guide](docs/testing.md).
+cd Contract && cargo test --workspace && cd ..
 ```
+
+Run the web, mobile, and backend tests with the package-specific commands below.
 
 ### Running each workspace package
 
-| Package            | Directory            | Command                                          |
-| ------------------ | -------------------- | ------------------------------------------------ |
-| Contracts (build)  | `packages/contracts` | `pnpm build` or `pnpm build:contracts` from root |
-| Contracts (test)   | `packages/contracts` | `cargo test` or `pnpm --filter contracts test`   |
-| Contracts (format) | `packages/contracts` | `cargo fmt`                                      |
-| Web (test)         | `packages/web`       | `pnpm --filter web test`                         |
-| Web (E2E)          | `packages/web`       | `pnpm --filter web test:e2e`                     |
-| Mobile (test)      | `apps/mobile`        | `pnpm --filter @Assay/mobile test`              |
-| Integration tests  | repo root            | `pnpm test:integration`                          |
-| Full lint          | repo root            | `pnpm lint`                                      |
-| Format all         | repo root            | `pnpm format`                                    |
+| Package            | Directory      | Command                                  |
+| ------------------ | -------------- | ---------------------------------------- |
+| Contracts (build)  | `Contract/`    | `cd Contract && cargo build --workspace` |
+| Contracts (test)   | `Contract/`    | `cd Contract && cargo test --workspace`  |
+| Contracts (format) | `Contract/`    | `cd Contract && cargo fmt --all`         |
+| Backend (test)     | `Backend/`     | `pnpm --filter @assay/api test`          |
+| Web (test)         | `apps/web/`    | `pnpm --filter @assay/web test`          |
+| Mobile (test)      | `apps/mobile/` | `pnpm --filter @assay/mobile test`       |
+| Full lint          | repo root      | `pnpm lint`                              |
+| Format all         | repo root      | `pnpm format`                            |
 
 ---
 
@@ -233,4 +231,3 @@ If you are unsure which label fits, open the issue without one and ask in [Teleg
 ## Security
 
 Do not open public issues for security vulnerabilities. Follow the process in [SECURITY.md](SECURITY.md).
-
