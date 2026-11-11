@@ -209,6 +209,15 @@ describe("withRetry", () => {
     expect(fn).toHaveBeenCalledTimes(1);
   });
 
+  it("rejects non-finite attempt budgets before running the operation", async () => {
+    for (const maxAttempts of [Number.NaN, Number.POSITIVE_INFINITY]) {
+      const fn = jest.fn().mockRejectedValue(new Error("RPC request failed: 400 Bad Request"));
+
+      await expect(withRetry(fn, { maxAttempts, log: makeLog() })).rejects.toThrow(/maxAttempts/);
+      expect(fn).not.toHaveBeenCalled();
+    }
+  });
+
   it("passes the abort signal through to a non-retryable caller without throwing early", async () => {
     const controller = new AbortController();
     controller.abort();

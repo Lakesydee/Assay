@@ -419,6 +419,9 @@ export async function withRetry<T>(fn: () => Promise<T>, opts: RetryOptions = {}
   // A retry budget below 1 would mean "never attempt", which cannot return a
   // value and has no error to rethrow. Clamp to 1 and let the call fail
   // normally on the single attempt.
+  if (!Number.isFinite(maxAttempts)) {
+    throw new RangeError("withRetry: maxAttempts must be finite");
+  }
   const attempts = Math.max(1, Math.floor(maxAttempts));
   let lastError: unknown;
 
