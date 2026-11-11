@@ -62,7 +62,7 @@ export class NormalizationError extends Error {
 }
 
 /** Stellar strkey: a 56-character base-32 public key starting with `G`. */
-const STELLAR_ADDRESS_RE = /^G[A-Z0-9]{55}$/;
+const STELLAR_ADDRESS_RE = /^G[A-Z2-7]{55}$/;
 
 const STROOPS_PER_UNIT = 10_000_000;
 
