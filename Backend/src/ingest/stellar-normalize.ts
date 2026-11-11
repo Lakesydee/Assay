@@ -156,7 +156,9 @@ function parseIntegerString(value: string): bigint | null {
 export function resolveStatus(raw: Record<string, unknown>): TxStatus {
   const status = raw.status;
   if (typeof status === "string") {
-    return status.toLowerCase() === "failed" ? "failed" : "success";
+    const normalized = status.trim().toLowerCase();
+    if (normalized === "failed") return "failed";
+    return normalized === "success" ? "success" : "failed";
   }
   if (raw.errorResult !== undefined && raw.errorResult !== null) {
     return "failed";
