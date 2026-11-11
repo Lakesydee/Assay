@@ -39,6 +39,11 @@ describe("decodeStellarBase64", () => {
   it("rejects a length no base64 string can have", () => {
     expect(() => decodeStellarBase64("A")).toThrow(NormalizationError);
   });
+
+  it("rejects invalid alphabet characters and padding", () => {
+    expect(() => decodeStellarBase64("!!!")).toThrow(NormalizationError);
+    expect(() => decodeStellarBase64("a=")).toThrow(NormalizationError);
+  });
 });
 
 describe("stroopsToUnits", () => {

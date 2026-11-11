@@ -79,11 +79,19 @@ const FRACTIONAL_DIGITS = STROOPS_PER_UNIT.toString().length - 1;
  * makes the value decodable by `Buffer`.
  */
 export function decodeStellarBase64(value: string): string {
+  if (!/^[A-Za-z0-9+/_-]*={0,2}$/.test(value)) {
+    throw new NormalizationError("value is not valid base64", "value");
+  }
   const standard = value.replace(/-/g, "+").replace(/_/g, "/");
   const unpadded = standard.replace(/=+$/, "");
   const remainder = unpadded.length % 4;
   // A length of 1 mod 4 cannot be produced by base64 at all.
   if (remainder === 1) {
+    throw new NormalizationError("value is not valid base64", "value");
+  }
+  const padding = standard.length - unpadded.length;
+  const expectedPadding = (4 - remainder) % 4;
+  if (padding > 0 && (standard.length % 4 !== 0 || padding !== expectedPadding)) {
     throw new NormalizationError("value is not valid base64", "value");
   }
   const padded = remainder === 0 ? unpadded : unpadded + "=".repeat(4 - remainder);
