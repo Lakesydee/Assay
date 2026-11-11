@@ -83,6 +83,10 @@ describe("resolveStatus", () => {
     expect(resolveStatus({ status: "SUCCESS" })).toBe("success");
   });
 
+  it("fails closed for an unrecognized explicit status", () => {
+    expect(resolveStatus({ status: "pending" })).toBe("failed");
+  });
+
   it("infers failure from errorResult", () => {
     expect(resolveStatus({ errorResult: "tx_failed" })).toBe("failed");
   });
