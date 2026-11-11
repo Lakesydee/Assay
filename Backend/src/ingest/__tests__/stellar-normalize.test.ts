@@ -149,9 +149,12 @@ describe("normalizeStellarEvent", () => {
     expect(() => normalizeStellarEvent("nope")).toThrow(NormalizationError);
   });
 
-  it("rejects a negative or fractional ledger", () => {
+  it("rejects non-positive, blank, or fractional ledgers", () => {
+    expect(() => normalizeStellarEvent({ id: "e1", ledger: 0 })).toThrow(NormalizationError);
     expect(() => normalizeStellarEvent({ id: "e1", ledger: -1 })).toThrow(NormalizationError);
     expect(() => normalizeStellarEvent({ id: "e1", ledger: 1.5 })).toThrow(NormalizationError);
+    expect(() => normalizeStellarEvent({ id: "e1", ledger: null })).toThrow(NormalizationError);
+    expect(() => normalizeStellarEvent({ id: "e1", ledger: " " })).toThrow(NormalizationError);
   });
 });
 

@@ -225,8 +225,14 @@ export function normalizeStellarEvent(
   }
 
   const ledger = raw.ledger;
-  const ledgerNumber = typeof ledger === "number" ? ledger : Number(ledger);
-  if (!Number.isInteger(ledgerNumber) || ledgerNumber < 0) {
+  const ledgerText = typeof ledger === "string" ? ledger.trim() : "";
+  const ledgerNumber =
+    typeof ledger === "number"
+      ? ledger
+      : /^\d+$/.test(ledgerText)
+        ? Number(ledgerText)
+        : Number.NaN;
+  if (!Number.isSafeInteger(ledgerNumber) || ledgerNumber <= 0) {
     throw new NormalizationError(`event ${eventId} has an invalid ledger`, "ledger");
   }
 
