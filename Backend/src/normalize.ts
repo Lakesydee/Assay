@@ -71,7 +71,11 @@ export function normalizeAmount(value: string | number | bigint): string {
     if (!Number.isFinite(value)) {
       throw new Error(`normalizeAmount: non-finite number ${value}`);
     }
-    return BigInt(Math.trunc(value)).toString();
+    const truncated = Math.trunc(value);
+    if (!Number.isSafeInteger(truncated)) {
+      throw new Error(`normalizeAmount: number exceeds safe integer range ${value}`);
+    }
+    return BigInt(truncated).toString();
   }
   // string
   const trimmed = value.trim();
