@@ -53,6 +53,17 @@ describe("MetricsRegistry / gauges", () => {
 });
 
 describe("MetricsRegistry / histograms", () => {
+  it("rejects non-finite or non-increasing bucket bounds", () => {
+    for (const buckets of [[10, 5], [5, 5], [5, Number.NaN]]) {
+      expect(
+        () =>
+          new MetricsRegistry([
+            { name: "custom_latency", type: "histogram", help: "latency", labelNames: [], buckets },
+          ])
+      ).toThrow(/finite and strictly increasing/);
+    }
+  });
+
   it("tracks count, sum, min, max", () => {
     const r = registry();
     r.observe("latency_ms", 3, { route: "/a" });

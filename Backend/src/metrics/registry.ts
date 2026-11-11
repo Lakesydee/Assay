@@ -151,6 +151,18 @@ export class MetricsRegistry {
 
   /** Declare a metric. Re-declaring an identical definition is a no-op. */
   define(definition: MetricDefinition): void {
+    if (definition.type === "histogram" && definition.buckets !== undefined) {
+      for (let index = 0; index < definition.buckets.length; index += 1) {
+        const bucket = definition.buckets[index];
+        if (
+          !Number.isFinite(bucket) ||
+          (index > 0 && bucket <= definition.buckets[index - 1])
+        ) {
+          throw new RangeError(`histogram ${definition.name} buckets must be finite and strictly increasing`);
+        }
+      }
+    }
+
     const existing = this.definitions.get(definition.name);
     if (existing) {
       if (existing.type !== definition.type) {
