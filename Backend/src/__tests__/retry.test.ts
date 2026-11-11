@@ -170,6 +170,35 @@ describe("withRetry", () => {
     expect(fn).toHaveBeenCalledTimes(1);
   });
 
+  it("interrupts the backoff wait when the signal aborts", async () => {
+    jest.useFakeTimers();
+    try {
+      const controller = new AbortController();
+      const fn = jest.fn().mockRejectedValue(new Error("socket hang up"));
+      const pending = withRetry(fn, {
+        maxAttempts: 5,
+        log: makeLog(),
+        baseDelayMs: 10_000,
+        jitter: false,
+        signal: controller.signal,
+      });
+      const rejection = expect(pending).rejects.toThrow(/socket hang up/);
+
+      await jest.advanceTimersByTimeAsync(0);
+      expect(jest.getTimerCount()).toBe(1);
+
+      controller.abort();
+      const timersAfterAbort = jest.getTimerCount();
+      await jest.advanceTimersByTimeAsync(10_000);
+      await rejection;
+
+      expect(timersAfterAbort).toBe(0);
+      expect(fn).toHaveBeenCalledTimes(1);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
   it("clamps a zero or negative attempt budget to a single attempt", async () => {
     const fn = jest.fn().mockRejectedValue(new Error("connection terminated"));
     const log = makeLog();
