@@ -59,6 +59,7 @@ describe("Rate Limiting", () => {
     const res = await request(app).get(route);
     expect(res.status).toBe(429);
     expect(res.body).toMatchObject({ code: "RATE_LIMIT_EXCEEDED" });
+    expect(Object.keys(res.body).sort()).toEqual(["code", "error"]);
   });
 
   it("includes Retry-After header on rate limit response", async () => {
